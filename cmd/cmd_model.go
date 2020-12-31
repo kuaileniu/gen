@@ -1,10 +1,11 @@
 package cmd
 
 import (
+	"runtime"
 	"os"
 	"path"
 	"strings"
-
+	"github.com/codeskyblue/kexec"
 	"github.com/kuaileniu/gen/consts"
 	"github.com/kuaileniu/gen/parser"
 
@@ -38,7 +39,36 @@ var modelCmd = &cobra.Command{
 		getSourceFileType()
 		getOrm()
 		allInfo:=parser.GetAllInfo(sourceModelFile, SourceFormat)
-		zap.L().Info("allInfo", zap.Reflect("allInfo", allInfo))
+		// zap.L().Info("allInfo", zap.Reflect("allInfo", allInfo))
+		allInfo.CompatibleGoType()
+		allInfo.InferenceColumnType()
+		allInfo.InferencePropTypeIsKey()
+		allInfo.InferenceColumnTypeRange()
+		allInfo.InferenceOmitempty()
+		allInfo.InferenceXormNotnull()
+		allInfo.InferenceUnique()
+		allInfo.InferenceJsonName()
+		allInfo.InferenceXormDefault()
+		allInfo.CollectImport()
+		if modelFieldSameNameAsTable {
+			allInfo.SetTableName()
+			allInfo.SetColumnName()
+		}
+		switch language {
+		case "go":
+			allInfo.CreatePoModel(targetModelFile)
+		default:
+			zap.L().Error("暂不支持生成的语言源文件。", zap.String("language",language))
+		}
+		// TODO 生成完毕后 用代码 对文件再执行一次 go fmt
+		cmdStr := "go fmt " + targetModelFile
+		p := kexec.CommandString(cmdStr)
+		if runtime.GOOS == "windows" {
+		} else {
+			p.SetUser("root")
+		}
+		zap.L().Debug("格式化执行命令",zap.String("cmdStr",cmdStr))
+		p.Run()
 	},
 }
 
