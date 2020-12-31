@@ -68,7 +68,7 @@ type ModelInfo struct {
 }
 
 func (info *ModelInfo) CreatePoModel(pathFile string) error {
-	tmpl, err := template.New("model").Parse(tplgo  .PoModelTmpl)
+	tmpl, err := template.New("model").Parse(tplgo.PoModelTmpl)
 	var buf bytes.Buffer
 	err = tmpl.Execute(&buf, info)
 

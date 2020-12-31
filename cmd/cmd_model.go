@@ -3,7 +3,8 @@ package cmd
 import (
 	"os"
 	"path"
-	"runtime"
+
+	// "runtime"
 	"strings"
 
 	"github.com/codeskyblue/kexec"
@@ -39,7 +40,7 @@ var modelCmd = &cobra.Command{
 		zap.L().Debug("args", zap.Strings("model-args", args))
 		getSourceFileType()
 		getOrm()
-		zap.L().Info("",zap.Bool("sameName", modelFieldSameNameAsTable))
+		zap.L().Info("", zap.Bool("sameName", modelFieldSameNameAsTable))
 		allInfo := parser.GetAllInfo(sourceModelFile, SourceFormat)
 		// zap.L().Info("allInfo", zap.Reflect("allInfo", allInfo))
 		allInfo.CompatibleGoType()
@@ -65,12 +66,8 @@ var modelCmd = &cobra.Command{
 		// TODO 生成完毕后 用代码 对文件再执行一次 go fmt
 		cmdStr := "go fmt " + targetModelFile
 		p := kexec.CommandString(cmdStr)
-		if runtime.GOOS == "windows" {
-		} else {
-			p.SetUser("root")
-		}
-		zap.L().Debug("格式化执行命令", zap.String("cmdStr", cmdStr))
 		p.Run()
+		zap.L().Debug("格式化执行命令完毕", zap.String("cmdStr", cmdStr))
 	},
 }
 
