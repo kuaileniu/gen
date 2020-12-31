@@ -2,15 +2,13 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	// "github.com/spf13/viper"
 	"go.uber.org/zap"
 )
-
-// var commonFile string
+ 
 var language string
 var rootCmd = &cobra.Command{
-	// Use:   "gen",
-	Use:   "",
+	Use:   "gen",
+	// Use:   "",
 	Short: "gen is code generate for go or java language",
 	Long:  "gen 是一个生成go或java语言代码的工具",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -27,7 +25,6 @@ func Execute() error {
 func init() {
 	initFlag()
 	cobra.OnInitialize(initConfig)
-	// rootCmd.AddCommand(modelCmd)
 	// rootCmd.AddCommand(serviceCmd)
 	
 }
