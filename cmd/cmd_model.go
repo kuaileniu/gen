@@ -1,11 +1,12 @@
 package cmd
 
 import (
-	"github.com/kuaileniu/gen/parser"
-	"github.com/kuaileniu/gen/consts"
 	"os"
 	"path"
 	"strings"
+
+	"github.com/kuaileniu/gen/consts"
+	"github.com/kuaileniu/gen/parser"
 
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
@@ -16,7 +17,9 @@ var sourceModelFile string         //model的源定义文件
 var modelFieldSameNameAsTable bool //PO是否同名于表名字段名
 // var showModel bool // 是否显示生成的model代码
 var sourceFileFormat string // 配置模型的文件类型，例如json，yaml，yml,参考 SourceFormat
-var SourceFileFormat consts.SourceFormat
+var SourceFormat consts.SourceFormat
+var orm string // 数据库层使用的持久化框架
+var OrmType consts.OrmType
 
 var modelCmd = &cobra.Command{
 	Use:   "model",
@@ -32,8 +35,8 @@ var modelCmd = &cobra.Command{
 		// zap.L().Info("收到", zap.Any("cmd", cmd), zap.Any("args", args))
 		zap.L().Info("args", zap.Strings("model-args", args))
 		checkSourceFileType()
-		allInfo := parser.GetAllInfo(sourceModelFile,SourceFileFormat)
-		zap.L().Info("allInfo",zap.Reflect("allInfo",allInfo))
+		allInfo := parser.GetAllInfo(sourceModelFile, SourceFormat)
+		zap.L().Info("allInfo", zap.Reflect("allInfo", allInfo))
 	},
 }
 
@@ -41,21 +44,21 @@ var modelCmd = &cobra.Command{
 func checkSourceFileType() {
 	switch sourceFileFormat {
 	case "json":
-		SourceFileFormat = consts.Json
+		SourceFormat = consts.Json
 	case "yaml", "yml":
-		SourceFileFormat = consts.Yaml
+		SourceFormat = consts.Yaml
 	case "":
 		ext := path.Ext(sourceModelFile)
 		if strings.EqualFold(".yaml", ext) || strings.EqualFold(".yml", ext) {
-			SourceFileFormat = consts.Yaml
+			SourceFormat = consts.Yaml
 		} else if strings.EqualFold(".json", ext) {
-			SourceFileFormat = consts.Json
+			SourceFormat = consts.Json
 		} else {
 			zap.L().Error("无法判断源文件类型")
 			os.Exit(1)
 		}
 	}
-	zap.L().Info(sourceModelFile+"的格式", zap.Reflect("SourceFileFormat", SourceFileFormat))
+	zap.L().Info(sourceModelFile+"的格式", zap.Reflect("SourceFormat", SourceFormat))
 }
 
 func init() {
@@ -67,4 +70,5 @@ func init() {
 	modelCmd.MarkFlagRequired("source") // 必填
 	modelCmd.Flags().BoolVarP(&modelFieldSameNameAsTable, "modelFieldSameNameAsTable", "n", false, "PO是否同名于表名字段名")
 	modelCmd.Flags().StringVarP(&sourceFileFormat, "sourceFileFormat", "f", "", "配置模型的文件类型，例如json，yaml，yml")
+	modelCmd.Flags().StringVarP(&orm, "orm", "o", "xorm", "")
 }
