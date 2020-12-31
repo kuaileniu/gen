@@ -5,8 +5,11 @@
 - https://www.bejson.com/json/json2yaml
 
 # 安装
-go install -ldflags "-s -w" github.com/kuaileniu/gen // install 后的可执行文件名称为 gen
+go install -ldflags "-s -w" github.com/kuaileniu/gen // install 后的可执行文件名称为 gen; windows下可以，
 
+当 git clone github.com/kuaileniu/gen 后，在gen根目录下执行
+go install -ldflags "-s -w" github.com/kuaileniu/gen ，将安装clone下来的代码
+go install -ldflags "-s -w" gen.go ，将安装clone下来的代码
 
 # 使用
 

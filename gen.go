@@ -4,7 +4,6 @@ import (
 	"github.com/kuaileniu/gen/cmd"
 	"github.com/kuaileniu/zlog"
 	"go.uber.org/zap"
-	"os"
 )
 
 func init() {
@@ -25,5 +24,5 @@ func main() {
 		zap.L().Error("cmd.Execute err", zap.Error(err))
 	}
 	zap.L().Info("gen over.")
-	os.Exit(1)
+	// os.Exit(0)  //添加这句会杀掉同名的进程，导致  同一个方法上面 不能执行多次//go:generate gen
 }
