@@ -4,17 +4,16 @@ import (
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 )
- 
+
 var language string
 var rootCmd = &cobra.Command{
-	Use:   "gen",
-	// Use:   "",
+	Use: "gen",
 	Short: "gen is code generate for go or java language",
 	Long:  "gen 是一个生成go或java语言代码的工具",
 	Run: func(cmd *cobra.Command, args []string) {
 		// zap.L().Info("公用配置文件路径", zap.String("commonFile", commonFile))
 		zap.L().Info("语言名称", zap.String("language", language))
-		zap.L().Info("收到", zap.Any("root-args", args))
+		zap.L().Debug("收到", zap.Any("root-args", args))
 	},
 }
 
@@ -26,7 +25,7 @@ func init() {
 	initFlag()
 	cobra.OnInitialize(initConfig)
 	// rootCmd.AddCommand(serviceCmd)
-	
+
 }
 
 func initConfig() {

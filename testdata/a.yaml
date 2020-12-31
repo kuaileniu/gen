@@ -1,0 +1,5 @@
+companies:
+  [
+    { id: 1, name: company1, price: 200W, 1id: 1, 1name: company1 },
+    { id: 2, name: company2, price: 500W },
+  ]
