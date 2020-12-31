@@ -37,11 +37,12 @@ var modelCmd = &cobra.Command{
 		zap.L().Debug("args", zap.Strings("model-args", args))
 		getSourceFileType()
 		getOrm()
-		parser.GetAllInfo(sourceModelFile, SourceFormat)
-		// zap.L().Info("allInfo", zap.Reflect("allInfo", allInfo))
+		allInfo:=parser.GetAllInfo(sourceModelFile, SourceFormat)
+		zap.L().Info("allInfo", zap.Reflect("allInfo", allInfo))
 	},
 }
 
+// 获取orm类型
 func getOrm() {
 	orm := strings.TrimSpace(strings.ToLower(Orm))
 	zap.L().Info("orm", zap.String("orm", orm))
