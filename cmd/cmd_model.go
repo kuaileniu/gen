@@ -1,10 +1,11 @@
 package cmd
 
 import (
-	"runtime"
 	"os"
 	"path"
+	"runtime"
 	"strings"
+
 	"github.com/codeskyblue/kexec"
 	"github.com/kuaileniu/gen/consts"
 	"github.com/kuaileniu/gen/parser"
@@ -38,7 +39,8 @@ var modelCmd = &cobra.Command{
 		zap.L().Debug("args", zap.Strings("model-args", args))
 		getSourceFileType()
 		getOrm()
-		allInfo:=parser.GetAllInfo(sourceModelFile, SourceFormat)
+		zap.L().Info("",zap.Bool("sameName", modelFieldSameNameAsTable))
+		allInfo := parser.GetAllInfo(sourceModelFile, SourceFormat)
 		// zap.L().Info("allInfo", zap.Reflect("allInfo", allInfo))
 		allInfo.CompatibleGoType()
 		allInfo.InferenceColumnType()
@@ -58,7 +60,7 @@ var modelCmd = &cobra.Command{
 		case "go":
 			allInfo.CreatePoModel(targetModelFile)
 		default:
-			zap.L().Error("暂不支持生成的语言源文件。", zap.String("language",language))
+			zap.L().Error("暂不支持生成的语言源文件。", zap.String("language", language))
 		}
 		// TODO 生成完毕后 用代码 对文件再执行一次 go fmt
 		cmdStr := "go fmt " + targetModelFile
@@ -67,7 +69,7 @@ var modelCmd = &cobra.Command{
 		} else {
 			p.SetUser("root")
 		}
-		zap.L().Debug("格式化执行命令",zap.String("cmdStr",cmdStr))
+		zap.L().Debug("格式化执行命令", zap.String("cmdStr", cmdStr))
 		p.Run()
 	},
 }
@@ -78,11 +80,11 @@ func getOrm() {
 	zap.L().Info("orm", zap.String("orm", orm))
 	switch orm {
 	case "xorm":
-		OrmType=consts.Xorm
+		OrmType = consts.Xorm
 	case "gorm":
-		OrmType=consts.Gorm
+		OrmType = consts.Gorm
 	case "mybatis":
-		OrmType=consts.MyBatis
+		OrmType = consts.MyBatis
 	}
 	zap.L().Info("持久化框架", zap.Reflect("OrmType", OrmType))
 }

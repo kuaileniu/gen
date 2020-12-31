@@ -10,4 +10,7 @@ go install -ldflags "-s -w" github.com/kuaileniu/gen // install 后的可执行�
 
 # 使用
 
-go run gen.go -l go model -t target/models/po_model.go -s testdata/model_info.json
+go run gen.go -l go model -t target/models/po_model.go -s testdata/model_info.yml -n true -o xorm
+
+
+"args": ["-l","go" ,"model" ,"-t" ,"target/models/po_model.go","-s","testdata/model_info.yml","-n","true","-o","xorm"]

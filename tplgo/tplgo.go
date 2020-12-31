@@ -1,4 +1,4 @@
-package golang
+package tplgo
 
 var PoModelTmpl = `package {{.PackageName}}
 {{- if .ImportList}}
