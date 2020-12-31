@@ -6,17 +6,17 @@ import (
 	"go.uber.org/zap"
 )
 
-var commonFile string
+// var commonFile string
 var language string
 var rootCmd = &cobra.Command{
 	// Use:   "gen",
 	Use:   "",
-	Short: "gen is code generate for go language",
-	Long:  "gen 是一个生成go语言代码的工具",
+	Short: "gen is code generate for go or java language",
+	Long:  "gen 是一个生成go或java语言代码的工具",
 	Run: func(cmd *cobra.Command, args []string) {
-		zap.L().Info("公用配置文件路径", zap.String("commonFile", commonFile))
+		// zap.L().Info("公用配置文件路径", zap.String("commonFile", commonFile))
 		zap.L().Info("语言名称", zap.String("language", language))
-		zap.L().Info("收到", zap.Any("cmd", cmd), zap.Any("args", args))
+		zap.L().Info("收到", zap.Any("args", args))
 	},
 }
 
@@ -39,6 +39,6 @@ func initFlag() {
 	// 第4个参数为默认值
 	rootCmd.PersistentFlags().StringVarP(&language, "lang", "l", "go", "请输入目标计算机语言名称")
 	// rootCmd.MarkPersistentFlagRequired("lang") //必填
-	rootCmd.PersistentFlags().StringVarP(&commonFile, "commonFile", "c", "", "请输入源文件路径")
+	// rootCmd.PersistentFlags().StringVarP(&commonFile, "commonFile", "c", "", "请输入源文件路径")
 	// viper.SetDefault("author", "冯江涛 <hggfjt@163.com>")
 }

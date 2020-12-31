@@ -1,13 +1,12 @@
 package main
 
 import(
- 
 	"github.com/kuaileniu/gen/cmd"
 	"os"
-
 	"github.com/kuaileniu/zlog"
 	"go.uber.org/zap"
 )
+
 func init() {
 	zlog.InitLogger(zlog.LogConfig{
 		Filename:   "./logs/gen.log",
