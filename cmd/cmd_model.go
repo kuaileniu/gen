@@ -4,11 +4,17 @@ import (
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 )
-
+type SourceFormat string
+const(
+	Json SourceFormat="json"
+	Yaml SourceFormat="yaml"
+	Yml SourceFormat="yml"
+)
 var targetModelFile string //新生成的model存放的路径
 var sourceModelFile string //model的源定义文件
 var modelFieldSameNameAsTable bool //PO是否同名于表名字段名
 // var showModel bool // 是否显示生成的model代码
+var sourceFileFormat string // 配置模型的文件类型，例如json，yaml，yml,参考 SourceFormat
 
 var modelCmd = &cobra.Command{
 	Use:   "model",
@@ -22,7 +28,7 @@ var modelCmd = &cobra.Command{
 		zap.L().Info("实体定义源文件", zap.String("sourceModelFile", sourceModelFile))
 		zap.L().Info("PO是否同名于表名字段名", zap.Bool("modelFieldSameNameAsTable", modelFieldSameNameAsTable))
 		// zap.L().Info("收到", zap.Any("cmd", cmd), zap.Any("args", args))
-		zap.L().Info("args",zap.Strings("args",args))
+		zap.L().Info("args",zap.Strings("model-args",args))
 	},
 }
 
@@ -34,4 +40,5 @@ func init() {
 	modelCmd.Flags().StringVarP(&sourceModelFile, "source", "s", "", "请输入实体定义源文件")
 	modelCmd.MarkFlagRequired("source") // 必填
 	modelCmd.Flags().BoolVarP(&modelFieldSameNameAsTable,"modelFieldSameNameAsTable","n",false,"PO是否同名于表名字段名")
+	modelCmd.Flags().StringVarP(&sourceFileFormat,"sourceFileFormat","f","","配置模型的文件类型，例如json，yaml，yml")
 }

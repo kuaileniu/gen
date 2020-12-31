@@ -16,7 +16,7 @@ var rootCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		// zap.L().Info("公用配置文件路径", zap.String("commonFile", commonFile))
 		zap.L().Info("语言名称", zap.String("language", language))
-		zap.L().Info("收到", zap.Any("args", args))
+		zap.L().Info("收到", zap.Any("root-args", args))
 	},
 }
 
