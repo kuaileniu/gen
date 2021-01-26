@@ -3,4 +3,4 @@
 
 rm -rf bin
 
-go build -ldflags "-s -w" -i -o bin/gen
+go build -gcflags=-m  -ldflags "-s -w" -i -o bin/gen
