@@ -1,3 +1,8 @@
+# go1.16
+go build 和 go test 默认情况下不再修改 go.mod 和 go.sum。可通过 go mod tidy ，go get 或者手动完成；
+
+go mod tidy
+
 # gen
 生成Go代码，Java代码，可配置xorm，gorm，dao，service,可使用yaml，json
 

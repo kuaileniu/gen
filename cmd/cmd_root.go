@@ -7,7 +7,7 @@ import (
 
 var language string
 var rootCmd = &cobra.Command{
-	Use: "gen",
+	Use:   "gen",
 	Short: "gen is code generate for go or java language",
 	Long:  "gen 是一个生成go或java语言代码的工具",
 	Run: func(cmd *cobra.Command, args []string) {

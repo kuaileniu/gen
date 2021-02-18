@@ -1,13 +1,13 @@
 package parser
 
 import (
-	"io/ioutil"
-	"os"
-	"gopkg.in/yaml.v2"
 	"github.com/kuaileniu/beanutil"
 	"github.com/kuaileniu/gen/consts"
 	"github.com/kuaileniu/gen/models"
 	"go.uber.org/zap"
+	"gopkg.in/yaml.v2"
+	"io/ioutil"
+	"os"
 )
 
 func GetAllInfo(pathFile string, format consts.SourceFormat) *models.ModelInfo {
