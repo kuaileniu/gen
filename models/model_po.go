@@ -37,6 +37,8 @@ type Column struct {
 	ColumnName string `json:"column_name" yaml:"column_name"`
 	//列类型
 	ColumnType string `json:"column_type" yaml:"column_type"` // 如果没传入值则在go代码中（非模板中）根据PropType推导出来
+	// 设置默认生成时间created 或 updated， xorm:"CreateTime timestamp created"` " xorm:"ModifyTime timestamp updated"`
+	DefaultTime string `json:"defalut_time" yaml:"defalut_time"`
 	//长度
 	Length string `json:"length" yaml:"length"`
 	//精度
@@ -89,6 +91,24 @@ func (info *ModelInfo) CompatibleGoType() {
 		info.TableList[table_index] = table
 	}
 }
+
+// // 设置自动生成默认时间
+// func (info *ModelInfo) InferenceColumnDefaultTime() {
+// 	for table_index, table := range info.TableList {
+// 		for col_index, col := range table.ColumnList {
+// 			defalutTime := strings.TrimSpace(col.DefaultTime)
+// 			if defalutTime!="" {
+// 				// created updated
+// 				col.DefaultTime = defalutTime
+
+// 			} else {
+// 				log.Printf("未将结构体属性类型[%v]映射到go数据库字段类型,%#v", col.PropType, col)
+// 			}
+// 			table.ColumnList[col_index] = col
+// 		}
+// 		info.TableList[table_index] = table
+// 	}
+// }
 
 // 推理出字段类型
 func (info *ModelInfo) InferenceColumnType() {

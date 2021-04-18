@@ -25,7 +25,7 @@ type {{$table.PoName}} struct {
 	{{- if .PropComment}}
 	// {{ .PropComment}}
 	{{- end}}
-	{{.PropName}} {{.PropType}} ` + "`" + `json:"{{.JsonName}}{{.Omitempty}}" xorm:"{{.ColumnName}}{{.PK}} {{.ColumnType}}{{.ColumnTypeRange}}{{.Notnull}}{{.Default}}{{.Unique}}"` + "`" + `
+	{{.PropName}} {{.PropType}} ` + "`" + `json:"{{.JsonName}}{{.Omitempty}}" xorm:"{{.ColumnName}}{{.PK}} {{.ColumnType}} {{.DefaultTime}} {{.ColumnTypeRange}}{{.Notnull}}{{.Default}}{{.Unique}}"` + "`" + `
 	{{- end}}
 }
 
