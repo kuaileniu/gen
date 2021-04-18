@@ -23,4 +23,4 @@ go run gen.go -l go model -t target/models/po_model.go -s testdata/model_info.js
 go run gen.go -l go model -t target/models/po_model.go -s testdata/model_info.yml -n true -o xorm
 
 
-gen -l go model -t target/models/po_model.go -s model_info.yml -n true -o xorm
+//gen -l go model -t target/models/po_model.go -s model_info.yml -n true -o xorm

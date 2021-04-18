@@ -92,23 +92,20 @@ func (info *ModelInfo) CompatibleGoType() {
 	}
 }
 
-// // 设置自动生成默认时间
-// func (info *ModelInfo) InferenceColumnDefaultTime() {
-// 	for table_index, table := range info.TableList {
-// 		for col_index, col := range table.ColumnList {
-// 			defalutTime := strings.TrimSpace(col.DefaultTime)
-// 			if defalutTime!="" {
-// 				// created updated
-// 				col.DefaultTime = defalutTime
-
-// 			} else {
-// 				log.Printf("未将结构体属性类型[%v]映射到go数据库字段类型,%#v", col.PropType, col)
-// 			}
-// 			table.ColumnList[col_index] = col
-// 		}
-// 		info.TableList[table_index] = table
-// 	}
-// }
+// 设置自动生成默认时间
+func (info *ModelInfo) InferenceColumnDefaultTime() {
+	for table_index, table := range info.TableList {
+		for col_index, col := range table.ColumnList {
+			defalutTime := strings.TrimSpace(col.DefaultTime)
+			if defalutTime != "" {
+				// created updated
+				col.DefaultTime = " " + defalutTime
+				table.ColumnList[col_index] = col
+			}
+		}
+		info.TableList[table_index] = table
+	}
+}
 
 // 推理出字段类型
 func (info *ModelInfo) InferenceColumnType() {

@@ -43,6 +43,7 @@ var modelCmd = &cobra.Command{
 		zap.L().Info("", zap.Bool("sameName", modelFieldSameNameAsTable))
 		allInfo := parser.GetAllInfo(sourceModelFile, SourceFormat)
 		// zap.L().Info("allInfo", zap.Reflect("allInfo", allInfo))
+		allInfo.InferenceColumnDefaultTime()
 		allInfo.CompatibleGoType()
 		allInfo.InferenceColumnType()
 		allInfo.InferencePropTypeIsKey()
