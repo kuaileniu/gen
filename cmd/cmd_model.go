@@ -23,6 +23,7 @@ var sourceFileFormat string // 配置模型的文件类型，例如json，yaml�
 var SourceFormat consts.SourceFormat
 var Orm string // 数据库层使用的持久化框架
 var OrmType consts.OrmType
+var JsonCase string
 
 var modelCmd = &cobra.Command{
 	Use:   "model",
@@ -51,7 +52,7 @@ var modelCmd = &cobra.Command{
 		allInfo.InferenceOmitempty()
 		allInfo.InferenceXormNotnull()
 		allInfo.InferenceUnique()
-		allInfo.InferenceJsonName()
+		allInfo.InferenceJsonName(JsonCase)
 		allInfo.InferenceXormDefault()
 		allInfo.CollectImport()
 		if modelFieldSameNameAsTable {
@@ -118,4 +119,6 @@ func init() {
 	modelCmd.Flags().BoolVarP(&modelFieldSameNameAsTable, "modelFieldSameNameAsTable", "n", false, "PO是否同名于表名字段名")
 	modelCmd.Flags().StringVarP(&sourceFileFormat, "sourceFileFormat", "f", "", "配置模型的文件类型,无值时根据文件后缀判断，例如json，yaml，yml")
 	modelCmd.Flags().StringVarP(&Orm, "orm", "o", "xorm", "数据库持久化框架，默认xorm,例如 xorm,gorm,mybatis")
+	modelCmd.Flags().StringVarP(&JsonCase, "jsoncase", "c", "origin", "生成的json首字母使用大写或小写，默认使用origin(与字段相同),例如 origin,lower,upper")
+
 }

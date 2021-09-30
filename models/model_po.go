@@ -212,7 +212,7 @@ func (info *ModelInfo) InferenceXormNotnull() {
 	}
 }
 
-func (info *ModelInfo) InferenceJsonName() {
+func (info *ModelInfo) InferenceJsonName(jsonCase string) {
 	// JsonName
 	for table_index, table := range info.TableList {
 		for col_index, col := range table.ColumnList {
@@ -220,7 +220,15 @@ func (info *ModelInfo) InferenceJsonName() {
 			if "" != strings.TrimSpace(col.JsonName) {
 				col.JsonName = strings.TrimSpace(col.JsonName)
 			} else {
-				col.JsonName = strings.TrimSpace(col.PropName)
+				JsonName := strings.TrimSpace(col.PropName)
+				// origin,lower,upper
+				if strings.EqualFold(jsonCase, "lower") {
+					col.JsonName = StringFirstToLower(JsonName)
+				} else if strings.EqualFold(jsonCase, "upper") {
+					col.JsonName = StringFirstToUpper(JsonName)
+				} else {
+					col.JsonName = JsonName
+				}
 			}
 			table.ColumnList[col_index] = col
 		}
@@ -289,4 +297,22 @@ func (info *ModelInfo) CollectImport() {
 			}
 		}
 	}
+}
+
+//字符串首字母转化为大写
+//abC -> AbC
+func StringFirstToUpper(str string) string {
+	rstr := []rune(str)
+	first := rstr[0]
+	firstUpper := strings.ToUpper(string(first))
+	return firstUpper + string(rstr[1:])
+}
+
+//字符串首字母转化为小写
+//abC -> AbC
+func StringFirstToLower(str string) string {
+	rstr := []rune(str)
+	first := rstr[0]
+	firstUpper := strings.ToLower(string(first))
+	return firstUpper + string(rstr[1:])
 }
