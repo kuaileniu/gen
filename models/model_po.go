@@ -300,7 +300,7 @@ func (info *ModelInfo) CollectImport() {
 }
 
 //字符串首字母转化为大写
-//abC -> AbC
+//AbC -> abC
 func StringFirstToUpper(str string) string {
 	rstr := []rune(str)
 	first := rstr[0]
