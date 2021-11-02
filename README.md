@@ -21,7 +21,8 @@ go install -ldflags "-s -w" gen.go ，将安装clone下来的代码
 // TODO 校验若是在docker容器内，退出系统
 func main() {}
 
-
+# 参数说明
+-n true //生成的数据库字段同go字段名称； 去掉此参数设置则 生成的orm映射字段采用 a1,a2 这种非明确含义字段。
 
 # 调试
 
