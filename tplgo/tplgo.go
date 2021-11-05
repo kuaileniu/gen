@@ -31,8 +31,14 @@ type {{$table.PoName}} struct {
 
 {{- if .ColumnList}}
 const (
+// DB	
 {{- range .ColumnList}}
-	{{$table.PoName}}_{{.PropName}} = "{{.ColumnName}}"
+	{{$table.PoName}}_{{.PropName}}_DB = "{{.ColumnName}}"
+{{- end}}
+
+// GO
+{{- range .ColumnList}}
+	{{$table.PoName}}_{{.PropName}}_GO = "{{.PropName}}"
 {{- end}}
 )
 {{- end}}
