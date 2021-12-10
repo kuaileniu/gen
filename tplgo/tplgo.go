@@ -10,7 +10,7 @@ import (
 )
 {{- end }}
 {{range $table:= .TableList}}
-// {{$table.PoComment}}
+// {{$table.TableName}} {{$table.PoComment}}
 var {{$table.PoName}}Ptr = &{{$table.PoName}}{}
 
 {{- end}}
@@ -19,7 +19,7 @@ func (po *{{.PoName}}) TableName() string {
 	return "{{.TableName}}"
 }
 
-// {{$table.PoComment}}
+// {{$table.TableName}} {{$table.PoComment}}
 type {{$table.PoName}} struct {
 	{{- range .ColumnList}}
 	{{- if .PropComment}}
