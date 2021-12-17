@@ -2,6 +2,9 @@
     "version": "0.2.0",
     "configurations": [
         {
+            // "debugAdapter": "dlv",
+            // 指定使用go语言自带的调式适配器,https://gitee.com/snow2zhou/vscode-go/blob/master/docs/dlv-dap.md
+            "debugAdapter": "dlv-dap",
             "name": "gen_debug",
             "type": "go",
             "request": "launch",
