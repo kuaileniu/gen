@@ -11,7 +11,8 @@
             "mode": "debug",
             //"program": "${file}",
             "program": "${workspaceFolder}",
-            "args": ["-l","go" ,"model" ,"-t" ,"target/models/po_model.go","-s","yamlsrc/model_info.yml","-n","true","-o","xorm","-c","lower"]
+            // "args": ["-l","go" ,"model" ,"-t" ,"target/models/po_model.go","-s","yamlsrc/model_info.yml","-n","true","-o","xorm","-c","lower"]
+            "args": ["-l","go" ,"controller" ,"-t" ,"target/controllers/controller.go","-s","yamlsrc/controller_info.yml","-n","true","-o","xorm","-c","lower"]
         }
     ]
 }
