@@ -1,6 +1,6 @@
 module github.com/kuaileniu/gen
 
-go 1.17
+go 1.18
 
 require (
 	github.com/codeskyblue/kexec v0.0.0-20180119015717-5a4bed90d99a
