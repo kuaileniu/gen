@@ -50,6 +50,12 @@ type Table struct {
 	ZoneKey string `json:"zone_key" yaml:"zone_key"`
 	// 在数据库中生成comment
 	CommentInDB bool `json:"comment_in_db" yaml:"comment_in_db"`
+	CannotDelModel string
+	
+	//# 修改标记为不能删除的go语句
+    //mark_cannot_del : 'MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId})'
+	MarkCannotDel string `json:"mark_cannot_del" yaml:"mark_cannot_del"`
+	
 }
 
 type ModelInfo struct {
