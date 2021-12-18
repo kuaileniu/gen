@@ -22,11 +22,15 @@ table_list:
         notnull: notnull
         # 代码中不可为空
         app_notnull: notnull
+        app_notrepeat: notrepeat
         prop_comment: 分区名称
         column_name: a2
         omitempty: omitempty
       - prop_name: AreaDescription
         prop_type: string
+        # 代码中不可为空
+        app_notnull: notnull
+        app_notrepeat: notrepeat
         prop_comment: 描述
         column_name: a3
         omitempty: omitempty

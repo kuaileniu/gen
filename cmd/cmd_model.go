@@ -74,9 +74,9 @@ var modelCmd = &cobra.Command{
 		format_po := "go fmt " + po_target
 		format_controller := "go fmt " + controller_target
 		commond_format_po := kexec.CommandString(format_po)
-		// commond_format_controller := kexec.CommandString(format_controller)
+		commond_format_controller := kexec.CommandString(format_controller)
 		commond_format_po.Run()
-		// commond_format_controller.Run()
+		commond_format_controller.Run()
 		zap.L().Debug("格式化执行命令完毕", zap.String("format_po", format_po),zap.String("format_controller", format_controller))
 	},
 }

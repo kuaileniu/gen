@@ -18,6 +18,8 @@ type Column struct {
 	Notnull string `json:"notnull" yaml:"notnull"` // "notnull": "notnull",
 	//代码中判断不可为空 
 	AppNotnull string `json:"app_notnull" yaml:"app_notnull"` // "app_notnull": notnull,
+	//代码中判断不可重复
+	AppNotRepeat string `json:"app_notrepeat" yaml:"app_notrepeat"` // "app_notrepeat": app_notrepeat,
 	// 数据库对应的字段名字
 	ColumnName string `json:"column_name" yaml:"column_name"`
 	//列类型

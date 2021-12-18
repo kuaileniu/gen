@@ -10,21 +10,47 @@ import (
 )
 {{- end }}
 {{range $table:= .TableList}}
-
-func Add{{.PoName}}(c *gin.Context){
+func Add{{.PoName}}(c *gin.Context) {
 	req := struct {
 		model.{{.PoName}}
 	}{}
 	c.ShouldBindJSON(&req)
 	{{- range .ColumnList}}{{/*不能为空的情况*/}}
 	{{- if eq .AppNotnull "notnull" }}
+	{{- if eq .PropType "string"}}
 	if strings.TrimSpace(req.{{ .PropName}}) == "" {
-		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "分区名称不可为空。", EnglishMsg: "AreaName can't be blank."})
+		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "{{.PropComment}}不可为空。", EnglishMsg: "AreaName can't be blank."})
+		return
+	}
+	{{- end}}
+	{{- if eq .PropType "int64"}}
+	if req.{{ .PropName}} < 1 {
+		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "{{.PropComment}}不可为空。", EnglishMsg: "AreaName can't be blank."})
 		return
 	}
 	{{- end}}
 	{{- end}}
+	{{- end}}
+
+	{{- range .ColumnList}}{{/*不能为空的情况*/}}
+	{{- if eq .AppNotRepeat "notrepeat" }}
+	{
+		exist, e := db.Engine.In(model.{{$table.PoName}}_{{.PropName}}_DB, req.JobId).Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
+		if e != nil {
+			zap.L().Error("根据 AreaName 查询 JtblArea 时异常", zap.Error(e))
+			c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "添加失败。", EnglishMsg: "Add failed"})
+			return
+		}
+		if exist {
+			c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "添加失败,分区名称重复。", EnglishMsg: "Add failed,duplicate AreaName."})
+			return
+		}
+	}
+	
+	{{- end}}
+	{{- end}}
 }
+
 {{- end}}
 `
 
