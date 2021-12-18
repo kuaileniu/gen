@@ -1,6 +1,97 @@
 # 如果觉得好用，请收藏或则分享本站
-package_name: models
+package_name: model
+package_controller: controllers
+model_path: github.com/kuaileniu/gen/target/model
 table_list:
+  - po_name: JtblArea
+    table_name: a2
+    po_comment: 分区(报告读取的参数)
+    column_list:
+      - prop_name: Id
+        prop_type: int64
+        column_name: a0
+        is_key: true
+      - prop_name: JobId
+        prop_type: int64
+        notnull: notnull
+        prop_comment: 项目ID
+        column_name: a1
+        omitempty: omitempty
+      - prop_name: AreaName
+        prop_type: string
+        notnull: notnull
+        # 代码中不可为空
+        app_notnull: notnull
+        prop_comment: 分区名称
+        column_name: a2
+        omitempty: omitempty
+      - prop_name: AreaDescription
+        prop_type: string
+        prop_comment: 描述
+        column_name: a3
+        omitempty: omitempty
+      - prop_name: LastCopiedSpool
+        prop_type: int64
+        prop_comment: '最后复制管段号'
+        column_name: a4
+        omitempty: omitempty
+      - prop_name: OnSkidArea
+        prop_type: int64
+        prop_comment: '撬上区域'
+        column_name: a5
+        omitempty: omitempty
+      - prop_name: DeliveryGroupId
+        prop_type: int64
+        prop_comment: '发货组ID'
+        column_name: a6
+        omitempty: omitempty
+      - prop_name: Spare1
+        prop_type: string
+        prop_comment: 自定义字段1
+        column_name: a7
+        omitempty: omitempty
+      - prop_name: Spare2
+        prop_type: string
+        prop_comment: 自定义字段2
+        column_name: a8
+        omitempty: omitempty
+      - prop_name: Spare3
+        prop_type: string
+        prop_comment: 自定义字段3
+        column_name: a9
+        omitempty: omitempty
+      - prop_name: Spare4
+        prop_type: string
+        prop_comment: 自定义字段4
+        column_name: b0
+        omitempty: omitempty
+      - prop_name: CreatedBy
+        prop_type: string
+        prop_comment: 创建人
+        column_name: z0
+        omitempty: omitempty
+      - prop_name: ModifiedBy
+        prop_type: string
+        prop_comment: 修改人
+        column_name: z1
+        omitempty: omitempty
+      - prop_name: CreateTime
+        notnull: notnull
+        prop_type: ztype.Time
+        defalut_time: created
+        column_name: z2
+      - prop_name: ModifyTime
+        notnull: notnull
+        prop_type: ztype.Time
+        defalut_time: updated
+        column_name: z3
+      - prop_name: CanDel
+        prop_type: bool
+        prop_comment: 能删除
+        column_name: z4
+        json_name: '-'
+        default: default(1)
+
   - po_name: Customer
     table_name: a
     controller_name: CustomerName
@@ -31,7 +122,6 @@ table_list:
       - prop_name: ModifyTime
         column_name: l
         prop_type: ztype.Time
-        defalut_time: updated
         defalut_time: updated
       - prop_name: Del
         column_name: e

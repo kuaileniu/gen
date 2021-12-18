@@ -14,8 +14,10 @@ type Column struct {
 	PropType string `json:"prop_type" yaml:"prop_type"`
 	// 导出和导入json时的名字
 	JsonName string `json:"json_name" yaml:"json_name"`
-	//不为空
+	//数据库库中字段不可为空
 	Notnull string `json:"notnull" yaml:"notnull"` // "notnull": "notnull",
+	//代码中判断不可为空 
+	AppNotnull string `json:"app_notnull" yaml:"app_notnull"` // "app_notnull": notnull,
 	// 数据库对应的字段名字
 	ColumnName string `json:"column_name" yaml:"column_name"`
 	//列类型
@@ -48,6 +50,11 @@ type Table struct {
 
 type ModelInfo struct {
 	PackageName string   `json:"package_name" yaml:"package_name"`
+	
 	TableList   []Table  `json:"table_list" yaml:"table_list"`
 	ImportList  []string `json:"-"`
+
+	PackageController string   `json:"package_controller" yaml:"package_controller"`
+	ControllerImportList [] string 
+	ModelPath string `yaml:"model_path"`
 }

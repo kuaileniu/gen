@@ -26,6 +26,15 @@ func (info *ModelInfo) CreatePoModel(pathFile string) error {
 	return err
 }
 
+func (info *ModelInfo) CreateControllerModel(pathFile string) error {
+	tmpl, err := template.New("controller").Parse(tplgo.ControllerModelTmpl)
+	var buf bytes.Buffer
+	err = tmpl.Execute(&buf, info)
+
+	err = zfile.ReWriteFile(pathFile, []byte(buf.Bytes()))
+	return err
+}
+
 // 兼容go类型
 func (info *ModelInfo) CompatibleGoType() {
 
@@ -245,6 +254,27 @@ func (info *ModelInfo) CollectImport() {
 			}
 		}
 	}
+}
+
+// 汇集 controller.import项
+func (info *ModelInfo) CollectControllerImport() {
+	// for _, table := range info.TableList {
+	// 	for _, col := range table.ColumnList {
+	// 		lower := strings.ToLower(col.PropType)
+	// 		if strings.HasPrefix(lower, "ztype.") {
+	// 			sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/ztype")
+	// 		} else if strings.HasPrefix(lower, "zconst.") {
+	// 			sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/zconst")
+	// 		}
+	// 	}
+	// }
+	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "net/http")
+	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "strings")
+	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/zweb/ctx")
+	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/zweb/enum")
+	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/gin-gonic/gin")
+	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "go.uber.org/zap")
+	sliceutil.AddNoRepeatStr(&info.ControllerImportList, info.ModelPath)
 }
 
 //字符串首字母转化为大写

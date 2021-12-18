@@ -16,7 +16,7 @@
             // 生成 controller
             // "args": ["-l","go" ,"controller" ,"-t" ,"target/controllers/controller.go","-s","yamlsrc/controller_info.yml","-c","lower"],
             // 生成 po controller
-            "args": ["-l","go" ,"model" ,"--po-target" ,"target/models/po_model.go","--po-source","yamlsrc/model_info.yml","--po-same-name-as-table","true","--orm","xorm","-c","lower"],
+            "args": ["--lang","go" ,"model" ,"--po-target" ,"target/model/po_model.go","--po-source","yamlsrc/model_info.yml","--po-same-name-as-table","true","--orm","xorm","--jsoncase","lower","--controller-target","target/controllers/controller_model.go"],
            
         }
     ]

@@ -8,15 +8,14 @@ require (
 	github.com/kuaileniu/sliceutil v1.0.0
 	github.com/kuaileniu/zconst v1.0.7
 	github.com/kuaileniu/zfile v1.0.4
-	github.com/kuaileniu/zlog v1.0.1
+	github.com/kuaileniu/zlog v1.1.2
 	github.com/spf13/cobra v1.1.1
 	github.com/stretchr/testify v1.6.1
 	go.uber.org/zap v1.16.0
-	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0
 )
 
-require github.com/kuaileniu/ztype v1.1.0
+require github.com/kuaileniu/ztype v1.2.1
 
 require (
 	github.com/axgle/mahonia v0.0.0-20180208002826-3358181d7394 // indirect
@@ -25,8 +24,8 @@ require (
 	github.com/jinzhu/now v1.1.1 // indirect
 	github.com/kuaileniu/gopanic v1.0.0 // indirect
 	github.com/kuaileniu/zio v1.0.0 // indirect
-	github.com/kuaileniu/znum v1.0.0 // indirect
-	github.com/kuaileniu/zstring v1.0.0 // indirect
+	github.com/kuaileniu/znum v1.1.0 // indirect
+	github.com/kuaileniu/zstring v1.0.6 // indirect
 	github.com/natefinch/lumberjack v2.0.0+incompatible // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
