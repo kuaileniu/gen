@@ -70,5 +70,23 @@ func Add{{.PoName}}(c *gin.Context) {
 	c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusOkTip, Msg: "添加成功", EnglishMsg: "Add success", Data: gin.H{"Id": po.Id}})
 }
 
+func Del{{.PoName}}(c *gin.Context) {
+	req := struct {
+		Ids []int64  `+ "`" +`json:"Ids"`+ "`" +`
+	}{}
+	c.ShouldBindJSON(&req)
+
+	if len(req.Ids) < 1 {
+		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "Ids不可为空", EnglishMsg: "Ids can't be blank"})
+		return
+	}
+
+	if _, err := db.Engine.NewSession().In(model.{{$table.PoName}}_Id_DB, req.Ids).And(model.{{$table.PoName}}_CanDel_DB + "=true").Delete(model.{{$table.PoName}}Ptr); err != nil {
+		zap.L().Error("删除 {{$table.PoName}} 时异常", zap.Error(err))
+		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "删除失败。", EnglishMsg: "Failed."})
+		return
+	}
+	c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusOkTip, Msg: "删除成功。", EnglishMsg: "Success."})
+}
 {{- end}}
 `
