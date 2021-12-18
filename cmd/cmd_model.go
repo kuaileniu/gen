@@ -15,9 +15,9 @@ import (
 	"go.uber.org/zap"
 )
 
-var po_target string           //新生成的model存放的路径
-var po_source string           //model的源定义文件，yml文件等
-var controller_target string   //新生成的controller存放的路径
+var po_target string         //新生成的model存放的路径
+var po_source string         //model的源定义文件，yml文件等
+var controller_target string //新生成的controller存放的路径
 // var controller_source string   //controller的源定义文件,yml文件等
 var po_same_name_as_table bool //PO是否同名于表名字段名
 // var showModel bool // 是否显示生成的model代码
@@ -77,7 +77,7 @@ var modelCmd = &cobra.Command{
 		commond_format_controller := kexec.CommandString(format_controller)
 		commond_format_po.Run()
 		commond_format_controller.Run()
-		zap.L().Debug("格式化执行命令完毕", zap.String("format_po", format_po),zap.String("format_controller", format_controller))
+		zap.L().Debug("格式化执行命令完毕", zap.String("format_po", format_po), zap.String("format_controller", format_controller))
 	},
 }
 

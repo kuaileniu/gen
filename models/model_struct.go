@@ -16,7 +16,7 @@ type Column struct {
 	JsonName string `json:"json_name" yaml:"json_name"`
 	//数据库库中字段不可为空
 	Notnull string `json:"notnull" yaml:"notnull"` // "notnull": "notnull",
-	//代码中判断不可为空 
+	//代码中判断不可为空
 	AppNotnull string `json:"app_notnull" yaml:"app_notnull"` // "app_notnull": notnull,
 	//代码中判断不可重复
 	AppNotRepeat string `json:"app_notrepeat" yaml:"app_notrepeat"` // "app_notrepeat": app_notrepeat,
@@ -46,17 +46,19 @@ type Table struct {
 	ColumnList []Column `json:"column_list" yaml:"column_list"`
 	//备注
 	PoComment string `json:"po_comment" yaml:"po_comment"`
+	// 区域主键，比如 可以替代 JtblArea_JobId_DB中的JobId (db.Engine.In(model.JtblArea_JobId_DB, req.JobId).Exist(&model.JtblArea{AreaName: req.AreaName}) )
+	ZoneKey string `json:"zone_key" yaml:"zone_key"`
 	// 在数据库中生成comment
 	CommentInDB bool `json:"comment_in_db" yaml:"comment_in_db"`
 }
 
 type ModelInfo struct {
-	PackageName string   `json:"package_name" yaml:"package_name"`
-	
-	TableList   []Table  `json:"table_list" yaml:"table_list"`
-	ImportList  []string `json:"-"`
+	PackageName string `json:"package_name" yaml:"package_name"`
 
-	PackageController string   `json:"package_controller" yaml:"package_controller"`
-	ControllerImportList [] string 
-	ModelPath string `yaml:"model_path"`
+	TableList  []Table  `json:"table_list" yaml:"table_list"`
+	ImportList []string `json:"-"`
+
+	PackageController    string `json:"package_controller" yaml:"package_controller"`
+	ControllerImportList []string
+	ModelPath            string `yaml:"model_path"`
 }

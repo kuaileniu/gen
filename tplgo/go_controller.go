@@ -1,5 +1,5 @@
 package tplgo
- 
+
 var ControllerModelTmpl = `package {{.PackageController}}
 {{- if .ControllerImportList}}
 {{/* 注释是这么写 */}} 
@@ -10,6 +10,7 @@ import (
 )
 {{- end }}
 {{range $table:= .TableList}}
+
 func Add{{.PoName}}(c *gin.Context) {
 	req := struct {
 		model.{{.PoName}}
@@ -35,7 +36,11 @@ func Add{{.PoName}}(c *gin.Context) {
 	{{- range .ColumnList}}{{/*不能为空的情况*/}}
 	{{- if eq .AppNotRepeat "notrepeat" }}
 	{
-		exist, e := db.Engine.In(model.{{$table.PoName}}_{{.PropName}}_DB, req.JobId).Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
+		{{ if  $table.ZoneKey -}}
+		exist, e := db.Engine.In(model.{{$table.PoName}}_{{$table.ZoneKey}}_DB, req.JobId).Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
+		{{ else }}
+		exist, e := db.Engine.Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
+		{{ end -}}
 		if e != nil {
 			zap.L().Error("根据 AreaName 查询 JtblArea 时异常", zap.Error(e))
 			c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "添加失败。", EnglishMsg: "Add failed"})
@@ -53,4 +58,3 @@ func Add{{.PoName}}(c *gin.Context) {
 
 {{- end}}
 `
-

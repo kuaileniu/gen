@@ -6,6 +6,8 @@ table_list:
   - po_name: JtblArea
     table_name: a2
     po_comment: 分区(报告读取的参数)
+    # 范围Key
+    zone_key: JobId
     column_list:
       - prop_name: Id
         prop_type: int64
@@ -15,6 +17,7 @@ table_list:
         prop_type: int64
         notnull: notnull
         prop_comment: 项目ID
+        app_notnull: notnull
         column_name: a1
         omitempty: omitempty
       - prop_name: AreaName
