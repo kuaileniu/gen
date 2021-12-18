@@ -26,8 +26,9 @@ table_list:
       - prop_name: AreaName
         prop_type: string
         notnull: notnull
-        # 代码中不可为空
+        # 代码中处理不可为空
         app_notnull: notnull
+        # 代码中处理不可重复
         app_notrepeat: notrepeat
         prop_comment: 分区名称
         column_name: a2
