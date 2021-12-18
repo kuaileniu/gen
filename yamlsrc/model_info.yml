@@ -1,6 +1,7 @@
 # 如果觉得好用，请收藏或则分享本站
 package_name: model
 package_controller: controllers
+# 模版中 import 引入 model 的路径
 model_path: github.com/kuaileniu/gen/target/model
 table_list:
   - po_name: JtblArea

@@ -9,6 +9,7 @@ import (
 	"github.com/kuaileniu/gen/tplgo"
 	"github.com/kuaileniu/sliceutil"
 	"github.com/kuaileniu/zfile"
+	"go.uber.org/zap"
 )
 
 //数据库对应的类型，例如：varchar
@@ -27,6 +28,10 @@ func (info *ModelInfo) CreatePoModel(pathFile string) error {
 }
 
 func (info *ModelInfo) CreateControllerModel(pathFile string) error {
+	if pathFile == "" {
+		zap.L().Info("未设置生成 controller 文件的存储位置")
+		return nil
+	}
 	tmpl, err := template.New("controller").Parse(tplgo.ControllerModelTmpl)
 	var buf bytes.Buffer
 	err = tmpl.Execute(&buf, info)
