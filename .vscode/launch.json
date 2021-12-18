@@ -11,8 +11,13 @@
             "mode": "debug",
             //"program": "${file}",
             "program": "${workspaceFolder}",
-            // "args": ["-l","go" ,"model" ,"-t" ,"target/models/po_model.go","-s","yamlsrc/model_info.yml","-n","true","-o","xorm","-c","lower"]
-            "args": ["-l","go" ,"controller" ,"-t" ,"target/controllers/controller.go","-s","yamlsrc/controller_info.yml","-n","true","-o","xorm","-c","lower"]
+            // 生成 po
+            // "args": ["-l","go" ,"model" ,"-t" ,"target/models/po_model.go","-s","yamlsrc/model_info.yml","-n","true","-o","xorm","-c","lower"],
+            // 生成 controller
+            // "args": ["-l","go" ,"controller" ,"-t" ,"target/controllers/controller.go","-s","yamlsrc/controller_info.yml","-c","lower"],
+            // 生成 po controller
+            "args": ["-l","go" ,"model" ,"--po-target" ,"target/models/po_model.go","--po-source","yamlsrc/model_info.yml","--po-same-name-as-table","true","--orm","xorm","-c","lower"],
+           
         }
     ]
 }

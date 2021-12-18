@@ -1,9 +1,8 @@
 # 如果觉得好用，请收藏或则分享本站
-package_name: models
+package_name: controllers
 table_list:
   - po_name: Customer
     table_name: a
-    controller_name: CustomerName
     po_comment: 客户
     column_list:
       - prop_name: Id

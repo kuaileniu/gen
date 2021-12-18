@@ -35,3 +35,4 @@ go run gen.go -l go model -t target/models/po_model.go -s testdata/model_info.ym
 
 
 go run gen.go -l go model -t target/models/po_model.go -s testdata/model_info.json -o xorm
+go run gen.go -l go model --po-target target/models/po_model.go --po-source testdata/model_info.json --orm xorm
