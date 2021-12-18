@@ -110,7 +110,7 @@ table_list:
         prop_comment: 表id
         is_key: true
         unique: unique(a_b)
-        prop_type: string
+        prop_type: int64
         length: 25
       - prop_name: OrderNum
         column_name: b
@@ -139,6 +139,22 @@ table_list:
         column_name: f
         unique: unique(a_b)
         prop_type: string
+      - prop_name: CreatedBy
+        prop_type: string
+        prop_comment: 创建人
+        column_name: z0
+        omitempty: omitempty
+      - prop_name: ModifiedBy
+        prop_type: string
+        prop_comment: 修改人
+        column_name: z1
+        omitempty: omitempty
+      - prop_name: CanDel
+        prop_type: bool
+        prop_comment: 能删除
+        column_name: z4
+        json_name: '-'
+        default: default(1) 
   - po_name: Staff
     table_name: a
     po_comment: 职员

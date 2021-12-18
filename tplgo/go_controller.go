@@ -2,7 +2,7 @@ package tplgo
 
 var ControllerModelTmpl = `package {{.PackageController}}
 {{- if .ControllerImportList}}
-{{/* 注释是这么写 */}} 
+{{/* 注释是这么写 ,双花括号中的横线放最前面时，此段多出一个空行，放最后时无空行*/}} 
 import (
 	{{- range $v:= .ControllerImportList}}
 	"{{$v}}"
@@ -54,6 +54,18 @@ func Add{{.PoName}}(c *gin.Context) {
 	
 	{{- end}}
 	{{- end}}
+
+	po := req.{{$table.PoName}}
+	po.Id = id.CreateTimeId15()
+	po.CreatedBy = GetCurrentStaffName(c)
+	po.CanDel = true
+	if _, err := db.Engine.Insert(&po); err != nil {
+		zap.L().Error("添加 {{$table.PoName}} 时异常", zap.Error(err))
+		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "添加失败", EnglishMsg: "Add failed"})
+		return
+	}
+	MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId})
+	c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusOkTip, Msg: "添加成功", EnglishMsg: "Add success", Data: gin.H{"Id": po.Id}})
 }
 
 {{- end}}
