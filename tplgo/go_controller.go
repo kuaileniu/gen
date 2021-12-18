@@ -20,13 +20,13 @@ func Add{{.PoName}}(c *gin.Context) {
 	{{- if eq .AppNotnull "notnull" }}
 	{{- if eq .PropType "string"}}
 	if strings.TrimSpace(req.{{ .PropName}}) == "" {
-		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "{{.PropComment}}不可为空。", EnglishMsg: "AreaName can't be blank."})
+		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "{{.PropComment}}不可为空。", EnglishMsg: "{{ .PropName}} can't be blank."})
 		return
 	}
 	{{- end}}
 	{{- if eq .PropType "int64"}}
 	if req.{{ .PropName}} < 1 {
-		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "{{.PropComment}}不可为空。", EnglishMsg: "AreaName can't be blank."})
+		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "{{.PropComment}}不可为空。", EnglishMsg: "{{ .PropName}} can't be blank."})
 		return
 	}
 	{{- end}}
@@ -47,7 +47,7 @@ func Add{{.PoName}}(c *gin.Context) {
 			return
 		}
 		if exist {
-			c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "添加失败,分区名称重复。", EnglishMsg: "Add failed,duplicate AreaName."})
+			c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "添加失败,{{.PropComment}}重复。", EnglishMsg: "Add failed,duplicate {{.PropName}}."})
 			return
 		}
 	}
