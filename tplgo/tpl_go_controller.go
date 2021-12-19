@@ -182,6 +182,13 @@ func Get{{.PoName}}Page(c *gin.Context) {
 		Search string ` + "`" + `json:"search"` + "`" + `
 	}{}
 	c.ShouldBindJSON(&req)
+	 
+	{{ if $table.ZoneKey }}
+	if req.{{$table.ZoneKey}} < 1 {
+		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "请填写正确的项目ID。", EnglishMsg: "{{$table.ZoneKey}} is incorrect."})
+		return
+	}
+	{{ end }}
 	{{- range .SearchSli}}
 		//{{.}}
 	{{- end }}
