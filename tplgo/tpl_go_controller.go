@@ -72,7 +72,7 @@ func Add{{.PoName}}(c *gin.Context) {
 
 func Del{{.PoName}}(c *gin.Context) {
 	req := struct {
-		Ids []int64  `+ "`" +`json:"Ids"`+ "`" +`
+		Ids []int64  ` + "`" + `json:"Ids"` + "`" + `
 	}{}
 	c.ShouldBindJSON(&req)
 
@@ -103,7 +103,7 @@ func Edit{{.PoName}}(c *gin.Context) {
 	po := model.{{.PoName}}{Id: req.Id}
 	session := db.Engine.NewSession()
 
-	{{- range .ColumnList}}{{/* 判断前端是否传值过来*/}}
+	{{- range .ColumnList}}        {{/* 判断前端是否传值过来*/}}
 
 	{{ if or .IsKey (eq .PropName "CreatedBy") (eq .PropName "ModifiedBy") (eq .PropName "CreateTime") (eq .PropName  "ModifyTime") (eq .PropName "CanDel") }}
 		{{continue}}
@@ -113,6 +113,22 @@ func Edit{{.PoName}}(c *gin.Context) {
     {{ else }}
 	if strings.Contains(body, strings.ToUpper(model.{{$table.PoName}}_{{.PropName}}_GO))  {
 	{{ end -}}
+		session.Cols(model.{{$table.PoName}}_{{.PropName}}_DB)
+		po.{{.PropName}} = req.{{.PropName}}
+		{{- if eq .AppNotnull "notnull" }}     {{/*判断必传参数必须存在*/}}
+		{{- if eq .PropType "string"}}
+		if strings.TrimSpace(req.{{ .PropName}}) == "" {
+			c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "{{.PropComment}}不可为空。", EnglishMsg: "{{ .PropName}} can't be blank."})
+			return
+		}
+		{{- end}}
+		{{- if eq .PropType "int64"}}
+		if req.{{ .PropName}} < 1 {
+			c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "{{.PropComment}}不可为空。", EnglishMsg: "{{ .PropName}} can't be blank."})
+			return
+		}
+		{{- end}}
+		{{- end}}
 	}
 	 
 	{{ end -}}
