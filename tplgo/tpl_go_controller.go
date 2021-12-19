@@ -88,5 +88,20 @@ func Del{{.PoName}}(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusOkTip, Msg: "删除成功。", EnglishMsg: "Success."})
 }
+
+func Edit{{.PoName}}(c *gin.Context) {
+	req := struct {
+		model.{{.PoName}}
+	}{}
+	body := GetBody(c, &req)
+
+	if req.Id < 1 {
+		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "Id不可为空", EnglishMsg: "Id can't be empty"})
+		return
+	}
+
+	po := model.{{.PoName}}{Id: req.Id}
+	session := db.Engine.NewSession()
+}
 {{- end}}
 `
