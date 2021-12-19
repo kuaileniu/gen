@@ -185,7 +185,7 @@ func Get{{.PoName}}Page(c *gin.Context) {
 	 
 	{{ if $table.ZoneKey }}
 	if req.{{$table.ZoneKey}} < 1 {
-		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "请填写正确的项目ID。", EnglishMsg: "{{$table.ZoneKey}} is incorrect."})
+		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "请填写正确的。", EnglishMsg: "{{$table.ZoneKey}} is incorrect."})
 		return
 	}
 	{{ end }}
