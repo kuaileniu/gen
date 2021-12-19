@@ -102,6 +102,19 @@ func Edit{{.PoName}}(c *gin.Context) {
 
 	po := model.{{.PoName}}{Id: req.Id}
 	session := db.Engine.NewSession()
+
+	{{- range .ColumnList}}{{/* 判断前端是否传值过来*/}}
+	{{ if .IsKey }}{{/* 判断是主键字段*/}}
+		{{continue}}
+	{{ end -}}
+	{{- if and .ForeignKey  (eq .PropType "int64") }}
+	if strings.Contains(body, strings.ToUpper(model.{{$table.PoName}}_{{.PropName}}_GO)) && req.{{.PropName}} >0 {
+	{{ else}}
+	if strings.Contains(body, strings.ToUpper(model.{{$table.PoName}}_{{.PropName}}_GO)) {
+	{{ end -}}
+	}
+	 
+	{{ end -}}
 }
 {{- end}}
 `

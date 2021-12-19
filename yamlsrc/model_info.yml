@@ -17,6 +17,8 @@ table_list:
         column_name: a0
         is_key: true
       - prop_name: JobId
+        # 是外键
+        foreign_key: true
         prop_type: int64
         notnull: notnull
         prop_comment: 项目ID

@@ -10,6 +10,8 @@ type Column struct {
 	Unique string `json:"unique" yaml:"unique"`
 	// go，java对应的属性名字
 	PropName string `json:"prop_name" yaml:"prop_name"`
+	// 是外键
+	ForeignKey bool `json:"foreign_key" yaml:"foreign_key"`
 	// 配置出来，反推 columnType
 	PropType string `json:"prop_type" yaml:"prop_type"`
 	// 导出和导入json时的名字
@@ -49,13 +51,12 @@ type Table struct {
 	// 区域主键，比如 可以替代 JtblArea_JobId_DB中的JobId (db.Engine.In(model.JtblArea_JobId_DB, req.JobId).Exist(&model.JtblArea{AreaName: req.AreaName}) )
 	ZoneKey string `json:"zone_key" yaml:"zone_key"`
 	// 在数据库中生成comment
-	CommentInDB bool `json:"comment_in_db" yaml:"comment_in_db"`
+	CommentInDB    bool `json:"comment_in_db" yaml:"comment_in_db"`
 	CannotDelModel string
-	
+
 	//# 修改标记为不能删除的go语句
-    //mark_cannot_del : 'MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId})'
+	//mark_cannot_del : 'MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId})'
 	MarkCannotDel string `json:"mark_cannot_del" yaml:"mark_cannot_del"`
-	
 }
 
 type ModelInfo struct {
