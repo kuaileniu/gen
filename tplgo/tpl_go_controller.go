@@ -174,5 +174,11 @@ func Edit{{.PoName}}(c *gin.Context) {
 	{{- end }}
 	c.JSON(http.StatusOK, &ctx.Resp{Status: enum.StatusOkTip, Msg: "修改成功。", EnglishMsg: "Success."})
 }
+
+func Get{{.PoName}}Page(c *gin.Context) {
+	{{- range .SearchSli}}
+		//{{.}}
+	{{- end }}
+}
 {{- end}}
 `

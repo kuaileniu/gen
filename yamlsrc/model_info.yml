@@ -11,6 +11,9 @@ table_list:
     zone_key: JobId
     # 修改标记为不能删除的go语句
     mark_cannot_del : 'MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId})'
+    search_sli:
+      - AreaName
+      - AreaDescription
     column_list:
       - prop_name: Id
         prop_type: int64

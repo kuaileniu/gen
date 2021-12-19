@@ -57,6 +57,8 @@ type Table struct {
 	//# 修改标记为不能删除的go语句
 	//mark_cannot_del : 'MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId})'
 	MarkCannotDel string `json:"mark_cannot_del" yaml:"mark_cannot_del"`
+	// 查询字段 []{AreaName,AreaDescription}
+	SearchSli []string `json:"search_sli" yaml:"search_sli"`
 }
 
 type ModelInfo struct {
