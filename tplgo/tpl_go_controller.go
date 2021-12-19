@@ -176,6 +176,12 @@ func Edit{{.PoName}}(c *gin.Context) {
 }
 
 func Get{{.PoName}}Page(c *gin.Context) {
+	req := struct {
+		model.{{.PoName}}
+		ctx.Req
+		Search string ` + "`" + `json:"search"` + "`" + `
+	}{}
+	c.ShouldBindJSON(&req)
 	{{- range .SearchSli}}
 		//{{.}}
 	{{- end }}
