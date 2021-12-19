@@ -56,17 +56,17 @@ func Add{{.PoName}}(c *gin.Context) {
 	{{- end}}
 
 	po := req.{{$table.PoName}}
-	{{ range .ColumnList}}        {{/*单独设置 Id CreatedBy */}}
-		{{ if eq .PropName "Id" }}
+	{{- range .ColumnList}}        {{/*单独设置 Id CreatedBy */}}
+		{{- if eq .PropName "Id" }}
 			po.Id = id.CreateTimeId15()
-		{{ end }}
-		{{ if eq .PropName "CreatedBy" }}
+		{{- end }}
+		{{- if eq .PropName "CreatedBy" }}
 			po.CreatedBy = GetCurrentStaffName(c)
-		{{ end }}
-		{{ if eq .PropName "CanDel" }}
+		{{- end }}
+		{{- if eq .PropName "CanDel" }}
 			po.CanDel = true
-		{{ end }}
-	{{ end }}
+		{{- end }}
+	{{- end }}
 	if _, err := db.Engine.Insert(&po); err != nil {
 		zap.L().Error("添加 {{$table.PoName}} 时异常", zap.Error(err))
 		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "添加失败", EnglishMsg: "Add failed"})
