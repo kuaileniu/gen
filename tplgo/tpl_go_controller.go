@@ -104,13 +104,14 @@ func Edit{{.PoName}}(c *gin.Context) {
 	session := db.Engine.NewSession()
 
 	{{- range .ColumnList}}{{/* 判断前端是否传值过来*/}}
-	{{ if .IsKey }}{{/* 判断是主键字段*/}}
+
+	{{ if or .IsKey (eq .PropName "CreatedBy") (eq .PropName "ModifiedBy") (eq .PropName "CreateTime") (eq .PropName  "ModifyTime") (eq .PropName "CanDel") }}
 		{{continue}}
 	{{ end -}}
 	{{- if and .ForeignKey  (eq .PropType "int64") }}
 	if strings.Contains(body, strings.ToUpper(model.{{$table.PoName}}_{{.PropName}}_GO)) && req.{{.PropName}} >0 {
-	{{ else}}
-	if strings.Contains(body, strings.ToUpper(model.{{$table.PoName}}_{{.PropName}}_GO)) {
+    {{ else }}
+	if strings.Contains(body, strings.ToUpper(model.{{$table.PoName}}_{{.PropName}}_GO))  {
 	{{ end -}}
 	}
 	 

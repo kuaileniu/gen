@@ -54,6 +54,8 @@ table_list:
         column_name: a5
         omitempty: omitempty
       - prop_name: DeliveryGroupId
+        # 是外键
+        foreign_key: true
         prop_type: int64
         prop_comment: '发货组ID'
         column_name: a6
