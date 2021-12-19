@@ -158,11 +158,21 @@ func Edit{{.PoName}}(c *gin.Context) {
 	 
 	{{ end -}}
 	{{- range .ColumnList}}        {{/*单独设置 ModifiedBy */}}
-		{{ if eq .PropName "ModifiedBy" }}
+		{{- if eq .PropName "ModifiedBy" }}
 			po.ModifiedBy = GetCurrentStaffName(c)
 			session.Cols(model.{{$table.PoName}}_{{.PropName}}_DB)
-		{{ end -}}
-	{{ end -}}
+		{{- end }}
+	{{- end }}
+	_, err := session.ID(req.Id).Update(&po){{/* 保存修改的内容 */}}
+	if err != nil {
+		zap.L().Error("修改 {{$table.PoName}} 失败", zap.Error(err))
+		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "修改失败", EnglishMsg: "Failed."})
+		return
+	}
+	{{- if .MarkCannotDel}}
+	{{.MarkCannotDel}}
+	{{- end }}
+	c.JSON(http.StatusOK, &ctx.Resp{Status: enum.StatusOkTip, Msg: "修改成功。", EnglishMsg: "Success."})
 }
 {{- end}}
 `
