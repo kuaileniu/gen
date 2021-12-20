@@ -137,22 +137,21 @@ func Edit{{.PoName}}(c *gin.Context) {
 		{{- end}}
 		{{- end}}{{/*判断必传参数必须存在*/}}
 		{{- if eq .AppNotRepeat "notrepeat" }} {{/*判断数据不重复*/}}
-		{
-			{{ if  $table.ZoneKey -}}
-			exist, e := db.Engine.In(model.{{$table.PoName}}_{{$table.ZoneKey}}_DB, req.JobId).Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
-			{{ else }}
-			exist, e := db.Engine.Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
-			{{ end -}}
-			if e != nil {
-				zap.L().Error("根据 {{.PropName}} 查询 {{$table.PoName}} 时异常", zap.Error(e))
-				c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "添加失败。", EnglishMsg: "Add failed"})
-				return
-			}
-			if exist {
-				c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "添加失败,{{.PropComment}}重复。", EnglishMsg: "Add failed,duplicate {{.PropName}}."})
-				return
-			}
-		}{{ end -}}{{/*判断数据不重复*/}}
+		{{ if  $table.ZoneKey -}}
+		exist, e := db.Engine.In(model.{{$table.PoName}}_{{$table.ZoneKey}}_DB, req.JobId).Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
+		{{ else }}
+		exist, e := db.Engine.Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
+		{{ end -}}
+		if e != nil {
+			zap.L().Error("根据 {{.PropName}} 查询 {{$table.PoName}} 时异常", zap.Error(e))
+			c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "添加失败。", EnglishMsg: "Add failed"})
+			return
+		}
+		if exist {
+			c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "添加失败,{{.PropComment}}重复。", EnglishMsg: "Add failed,duplicate {{.PropName}}."})
+			return
+		}
+		{{- end -}}{{/*判断数据不重复*/}}
 	}
 	 
 	{{ end -}}
