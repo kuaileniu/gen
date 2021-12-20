@@ -48,8 +48,10 @@ type Table struct {
 	ColumnList []Column `json:"column_list" yaml:"column_list"`
 	//备注
 	PoComment string `json:"po_comment" yaml:"po_comment"`
-	// 区域主键，比如 可以替代 JtblArea_JobId_DB中的JobId (db.Engine.In(model.JtblArea_JobId_DB, req.JobId).Exist(&model.JtblArea{AreaName: req.AreaName}) )
+	// 区域主键，比例如JobId， 可以替代 JtblArea_JobId_DB中的JobId (db.Engine.In(model.JtblArea_JobId_DB, req.JobId).Exist(&model.JtblArea{AreaName: req.AreaName}) )
 	ZoneKey string `json:"zone_key" yaml:"zone_key"`
+	// # 范围Key的注释 ，例如 项目ID
+	ZoneKeyComment string `json:"zone_key" yaml:"zone_key_comment"`
 	// 在数据库中生成comment
 	CommentInDB    bool `json:"comment_in_db" yaml:"comment_in_db"`
 	CannotDelModel string

@@ -9,6 +9,8 @@ table_list:
     po_comment: 分区(报告读取的参数)
     # 范围Key
     zone_key: JobId
+    # 范围Key的注释
+    zone_key_comment: 项目ID
     # 修改标记为不能删除的go语句
     mark_cannot_del : 'MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId})'
     search_sli:
