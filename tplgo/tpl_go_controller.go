@@ -112,7 +112,7 @@ func Edit{{.PoName}}(c *gin.Context) {
 	session := db.Engine.NewSession()
 
 	{{- range .ColumnList}}        {{/* 判断前端是否传值过来*/}}
-	{{ if or .IsKey (eq .PropName "CreatedBy") (eq .PropName "ModifiedBy") (eq .PropName "CreateTime") (eq .PropName  "ModifyTime") (eq .PropName "CanDel") }}
+	{{- if or .IsKey (eq .PropName "CreatedBy") (eq .PropName "ModifiedBy") (eq .PropName "CreateTime") (eq .PropName  "ModifyTime") (eq .PropName "CanDel") }}
 		{{continue}}
 	{{ end -}}
 	{{- if and .ForeignKey  (eq .PropType "int64") }}
