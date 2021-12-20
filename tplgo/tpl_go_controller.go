@@ -182,13 +182,12 @@ func Get{{.PoName}}Page(c *gin.Context) {
 		Search string ` + "`" + `json:"search"` + "`" + `
 	}{}
 	c.ShouldBindJSON(&req)
-
 	{{ if $table.ZoneKey }}
 	if req.{{$table.ZoneKey}} < 1 {
 		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "请填写正确的{{$table.ZoneKeyComment}}。", EnglishMsg: "{{$table.ZoneKey}} is incorrect."})
 		return
 	}
-	{{ end }}
+	{{- end }}
 	poSli := make([]model.{{.PoName}}, 0)
 	session := db.Engine.NewSession()
 	if req.Search != "" {
@@ -213,6 +212,17 @@ func Get{{.PoName}}Page(c *gin.Context) {
 		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "查询数据发生异常请稍后重试", EnglishMsg: "Error occurs when finding data"})
 		return
 	}
+	type VO struct {
+		model.{{.PoName}}
+	}
+	voSli := make([]VO, len(poSli))
+	for i := 0; i < len(poSli); i++ {
+		vo := VO{}
+		copier.Copy(&vo, &(poSli[i]))
+		voSli[i] = vo
+	}
+
+	c.JSON(http.StatusOK, (&ctx.PageResp{Total: total}).SetData(voSli)) //分页结果
 }
 {{- end}}
 `
