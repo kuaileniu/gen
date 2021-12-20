@@ -189,9 +189,14 @@ func Get{{.PoName}}Page(c *gin.Context) {
 		return
 	}
 	{{ end }}
-	{{- range .SearchSli}}
-		//{{.}}
-	{{- end }}
+	poSli := make([]model.{{.PoName}}, 0)
+	session := db.Engine.NewSession()
+	if req.Search != "" {
+		{{- range .SearchSli}}
+		session.Or(model.{{$table.PoName}}_{{.}}_DB + " like ?","%"+req.Search+"%" )
+		{{- end }}
+	}
+
 }
 {{- end}}
 `
