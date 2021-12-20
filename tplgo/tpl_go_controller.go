@@ -56,17 +56,17 @@ func Add{{.PoName}}(c *gin.Context) {
 	{{- end}}
 
 	po := req.{{$table.PoName}}
-	{{- range .ColumnList}}        {{/*单独设置 Id CreatedBy */}}
-		{{- if eq .PropName "Id" }}
-			po.Id = id.CreateTimeId15()
-		{{- end }}
-		{{- if eq .PropName "CreatedBy" }}
-			po.CreatedBy = GetCurrentStaffName(c)
-		{{- end }}
-		{{- if eq .PropName "CanDel" }}
-			po.CanDel = true
-		{{- end }}
+	{{- range .ColumnList}}        {{/*单独设置 Id CreatedBy,CanDel */}}
+	{{- if eq .PropName "Id" }}
+	po.Id = id.CreateTimeId15()
 	{{- end }}
+	{{- if eq .PropName "CreatedBy" }}
+	po.CreatedBy = GetCurrentStaffName(c)
+	{{- end }}
+	{{- if eq .PropName "CanDel" }}
+	po.CanDel = true
+	{{- end }}
+	{{- end }}   {{/*单独设置 Id CreatedBy,CanDel */}}
 	if _, err := db.Engine.Insert(&po); err != nil {
 		zap.L().Error("添加 {{$table.PoName}} 时异常", zap.Error(err))
 		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "添加失败", EnglishMsg: "Add failed"})
@@ -159,7 +159,7 @@ func Edit{{.PoName}}(c *gin.Context) {
 	session.Cols(model.{{$table.PoName}}_{{.PropName}}_DB)
 	{{- end }}
 	{{- end }} {{/*单独设置 ModifiedBy */}}
-	
+
 	_, err := session.ID(req.Id).Update(&po){{/* 保存修改的内容 */}}
 	if err != nil {
 		zap.L().Error("修改 {{$table.PoName}} 失败", zap.Error(err))
