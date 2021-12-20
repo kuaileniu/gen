@@ -118,7 +118,7 @@ func Edit{{.PoName}}(c *gin.Context) {
 	{{- if and .ForeignKey  (eq .PropType "int64") }}
 	if strings.Contains(body, strings.ToUpper(model.{{$table.PoName}}_{{.PropName}}_GO)) && req.{{.PropName}} >0 {
 	{{- else }}
-	if strings.Contains(body, strings.ToUpper(model.{{$table.PoName}}_{{.PropName}}_GO))  {
+	if strings.Contains(body, strings.ToUpper(model.{{$table.PoName}}_{{.PropName}}_GO)) {
 	{{- end }}
 		session.Cols(model.{{$table.PoName}}_{{.PropName}}_DB)
 		po.{{.PropName}} = req.{{.PropName}}
