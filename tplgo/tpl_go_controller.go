@@ -37,7 +37,7 @@ func Add{{.PoName}}(c *gin.Context) {
 	{{- if eq .AppNotRepeat "notrepeat" }}
 	{
 		{{ if  $table.ZoneKey -}}
-		exist, e := db.Engine.In(model.{{$table.PoName}}_{{$table.ZoneKey}}_DB, req.JobId).Exist(&model.{{$table.PoName}}{{{.PropName}}: req.{{.PropName}} })
+		exist, e := db.Engine.In(model.{{$table.PoName}}_{{$table.ZoneKey}}_DB, req.JobId).Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
 		{{ else }}
 		exist, e := db.Engine.Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
 		{{ end -}}
