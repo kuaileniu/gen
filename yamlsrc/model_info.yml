@@ -27,6 +27,7 @@ table_list:
         prop_type: int64
         notnull: notnull
         prop_comment: 项目ID
+        # 代码中处理不可为空
         app_notnull: notnull
         column_name: a1
         omitempty: omitempty
@@ -44,6 +45,7 @@ table_list:
         prop_type: string
         # 代码中不可为空
         app_notnull: notnull
+        # 代码中处理不可重复
         app_notrepeat: notrepeat
         prop_comment: 描述
         column_name: a3
