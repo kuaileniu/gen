@@ -274,6 +274,7 @@ func (info *ModelInfo) CollectControllerImport() {
 	// 	}
 	// }
 	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/gin-gonic/gin")
+	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/jinzhu/copier")
 	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/db")
 	sliceutil.AddNoRepeatStr(&info.ControllerImportList, info.ModelPath)
 	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/id")
