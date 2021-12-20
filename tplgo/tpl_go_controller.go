@@ -196,7 +196,12 @@ func Get{{.PoName}}Page(c *gin.Context) {
 		session.Or(model.{{$table.PoName}}_{{.}}_DB + " like ?","%"+req.Search+"%" )
 		{{- end }}
 	}
-
+	total, err := session.In(model.{{.PoName}}_{{$table.ZoneKey}}_DB, req.{{$table.ZoneKey}}).Limit(req.PageSize, req.PageStart()).Desc(model.{{$table.PoName}}_CreateTime_DB).FindAndCount(&poSli)
+	if err != nil {
+		zap.L().Error("查询 {{.PoName}} 表时发生异常", zap.Error(err))
+		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "查询数据发生异常请稍后重试", EnglishMsg: "Error occurs when finding data"})
+		return
+	}
 }
 {{- end}}
 `
