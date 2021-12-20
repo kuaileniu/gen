@@ -126,7 +126,7 @@ func init() {
 	modelCmd.MarkFlagRequired("po-target") // 必填
 	modelCmd.Flags().StringVarP(&po_source, "po-source", "s", "", "请输入po定义源文件")
 	modelCmd.MarkFlagRequired("po-source") // 必填
-	modelCmd.Flags().BoolVarP(&po_same_name_as_table, "po-same-name-as-table", "n", false, "PO是否同名于表名字段名")
+	modelCmd.Flags().BoolVarP(&po_same_name_as_table, "po-same-name-as-table", "n", false, "PO是否同名于表名字段名,默认false即数据库表名字段名使用a,b等")
 	// modelCmd.Flags().StringVarP(&sourceFileFormat, "sourceFileFormat", "f", "", "配置模型的文件类型,无值时根据文件后缀判断，例如json，yaml，yml")
 	modelCmd.Flags().StringVarP(&Orm, "orm", "o", "xorm", "数据库持久化框架，默认xorm,例如 xorm,gorm,mybatis")
 	modelCmd.Flags().StringVarP(&JsonCase, "jsoncase", "c", "origin", "生成的po中的json首字母使用大写或小写，默认使用origin(与字段相同),例如 origin,lower,upper")
