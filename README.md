@@ -1,4 +1,4 @@
-# go1.17
+# go1.18
 go build 和 go test 默认情况下不再修改 go.mod 和 go.sum。可通过 go mod tidy ，go get 或者手动完成；
 
 go mod tidy
