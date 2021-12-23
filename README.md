@@ -3,7 +3,7 @@ go build 和 go test 默认情况下不再修改 go.mod 和 go.sum。可通过 g
 
 go mod tidy
 
-- go 1.17 版本不支持 模版中有这个语句 {{- continue -}}  
+- go 1.17 版本不支持 模版中有这个语句 {{- continue -}}  go1.18-bata1版本支持
 # gen
 生成Go代码，Java代码，可配置xorm，gorm，dao，service,可使用yaml，json
 
