@@ -138,7 +138,7 @@ func Edit{{.PoName}}(c *gin.Context) {
 		{{- end}}{{/*判断必传参数必须存在*/}}
 		{{- if eq .AppNotRepeat "notrepeat" }} {{/*判断数据不重复*/}}
 		{{ if  $table.ZoneKey -}}
-		exist, e := db.Engine.In(model.{{$table.PoName}}_{{$table.ZoneKey}}_DB, req.JobId).Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
+		exist, e := db.Engine.In(model.{{$table.PoName}}_{{$table.ZoneKey}}_DB, req.JobId).NotIn(model.{{$table.PoName}}_Id_DB,req.Id).Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
 		{{ else }}
 		exist, e := db.Engine.Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
 		{{ end -}}
