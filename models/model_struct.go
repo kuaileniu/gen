@@ -38,6 +38,8 @@ type Column struct {
 	Default string `json:"default" yaml:"default"`
 	//备注
 	PropComment string `json:"prop_comment" yaml:"prop_comment"`
+	// 完整的备注
+	PropAllComment string `json:"prop_comment" yaml:"prop_all_comment"`
 	// 在数据库中生成comment
 	CommentShowInDB bool `json:"comment_in_db" yaml:"comment_in_db"`
 }

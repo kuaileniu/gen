@@ -27,6 +27,7 @@ table_list:
         prop_type: int64
         notnull: notnull
         prop_comment: 项目ID
+        prop_all_comment: 项目ID,需要做点别的
         # 代码中处理不可为空
         app_notnull: notnull
         column_name: a1
