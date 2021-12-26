@@ -278,6 +278,7 @@ func (info *ModelInfo) CollectControllerImport() {
 	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/db")
 	sliceutil.AddNoRepeatStr(&info.ControllerImportList, info.ModelPath)
 	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/id")
+	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/sliceutil")
 	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/zweb/ctx")
 	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/zweb/enum")
 	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "go.uber.org/zap")
