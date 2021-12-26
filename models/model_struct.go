@@ -63,6 +63,29 @@ type Table struct {
 	MarkCannotDel string `json:"mark_cannot_del" yaml:"mark_cannot_del"`
 	// 查询字段 []{AreaName,AreaDescription}
 	SearchSli []string `json:"search_sli" yaml:"search_sli"`
+	// vo 属性数组
+	VoPropSli []VoProp `json:"vo_prop_sli" yaml:"vo_prop_sli"`
+}
+
+type VoProp struct{
+	// ## vo 对应的属性
+	// ## vo json 显示名称
+	// - vo_prop_show: ReportGroupingName
+	//   vo_prop_key: ReportGroupingId
+	//   po: JtblReportGrouping
+	//   po_key_name: Id
+	//   po_key_col: ReportGroupingName
+
+	// vo 中显示给前端的属性名称
+	VoShow string `yaml:"vo_show"`
+	// 查 vo_prop_show 依赖的vo中的属性
+	VoDependent string `yaml:"vo_dependent"`
+	// PO 名称
+	Po string `yaml:"po"`
+	// po 的主键对应的名称
+	PoKeyName string `yaml:"po_key_name"`
+	// po 中对应 vo_show 的字段
+	PoDependent string `yaml:"po_dependent"`
 }
 
 type ModelInfo struct {
