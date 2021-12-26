@@ -104,6 +104,69 @@ table_list:
         json_name: '-'
         default: default(1)
 
+
+  - po_name: JtblReportGrouping
+    table_name: aa
+    po_comment: 报告组
+    # 范围Key
+    zone_key: JobId
+    # 范围Key的注释
+    zone_key_comment: 项目ID
+    # 修改标记为不能删除的go语句
+    mark_cannot_del : 'MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId})'
+    search_sli:
+      - ReportGroupingName
+      - CleaningSpec
+    column_list:
+      - prop_name: Id
+        prop_type: int64
+        column_name: a0
+        is_key: true
+      - prop_name: JobId
+        prop_type: int64
+        prop_comment: 项目ID
+        column_name: a1
+        # 是外键
+        foreign_key: true
+        # 代码中处理不可为空
+        app_notnull: notnull
+      - prop_name: ReportGroupingName
+        prop_type: string
+        prop_comment: 报告分组名称
+        column_name: a2
+        # 代码中处理不可重复
+        app_notrepeat: notrepeat
+        # 代码中处理不可为空
+        app_notnull: notnull
+      - prop_name: CleaningSpec
+        prop_type: string
+        prop_comment: 清理规范
+        column_name: a3
+      - prop_name: CreatedBy
+        prop_type: string
+        prop_comment: 创建人
+        column_name: z0
+      - prop_name: ModifiedBy
+        prop_type: string
+        prop_comment: 修改人
+        column_name: z1
+      - prop_name: CreateTime
+        notnull: notnull
+        prop_type: ztype.Time
+        defalut_time: created
+        column_name: z2
+      - prop_name: ModifyTime
+        notnull: notnull
+        prop_type: ztype.Time
+        defalut_time: updated
+        column_name: z3
+      - prop_name: CanDel
+        prop_type: bool
+        prop_comment: 能删除
+        column_name: z4
+        json_name: '-'
+        default: default(1) 
+
   - po_name: JtblArea
     table_name: a2
     po_comment: 分区(报告读取的参数)

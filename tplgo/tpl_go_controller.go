@@ -232,6 +232,16 @@ func Get{{.PoName}}Page(c *gin.Context) {
 	{{- if .VoPropSli}}
 		wg := pool.NewWaitGroup({{len .VoPropSli}})
 	{{- end }}
+	{{- range .VoPropSli}}
+	 	wg.Add(func(){
+			poMap := make(map[int64]*model.{{.Po}})
+			if err := db.Engine.In(model.{{.Po}}_{{.PoKeyName}}_DB, {{.VoDependent}}Sli).Cols(model.JtblReportGrouping_Id_DB, model.JtblReportGrouping_ReportGroupingName_DB).Find(&poMap); err != nil {
+				zap.L().Error("查询 JtblReportGrouping 表时发生异常", zap.Error(err))
+				c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "查询数据发生异常请稍后重试", EnglishMsg: "Error occurs when finding data"})
+				return
+			}
+		 })
+	{{- end }}
 	{{- if .VoPropSli}}
 	    wg.Wait()
 	{{- end }}
