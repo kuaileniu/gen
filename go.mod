@@ -10,8 +10,8 @@ require (
 	github.com/kuaileniu/zfile v1.0.4
 	github.com/kuaileniu/zlog v1.1.2
 	github.com/spf13/cobra v1.1.1
-	github.com/stretchr/testify v1.6.1
-	go.uber.org/zap v1.16.0
+	github.com/stretchr/testify v1.7.0
+	go.uber.org/zap v1.19.1
 	gopkg.in/yaml.v2 v2.4.0
 )
 
@@ -19,7 +19,10 @@ require (
 	github.com/gin-gonic/gin v1.7.4
 	github.com/jinzhu/copier v0.3.4
 	github.com/kuaileniu/db v1.0.1
+	github.com/kuaileniu/gopanic v1.0.0
 	github.com/kuaileniu/id v0.0.6
+	github.com/kuaileniu/pool v1.0.0
+	github.com/kuaileniu/smcs_server_202109 v0.0.0-20211226091834-82b8c3132d83
 	github.com/kuaileniu/ztype v1.2.1
 	github.com/kuaileniu/zweb v1.0.22
 )
@@ -39,13 +42,12 @@ require (
 	github.com/go-playground/locales v0.13.0 // indirect
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
-	github.com/golang/protobuf v1.3.3 // indirect
+	github.com/golang/protobuf v1.4.2 // indirect
 	github.com/golang/snappy v0.0.0-20180518054509-2e65f85255db // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.1 // indirect
 	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/kuaileniu/encrypt v1.1.6 // indirect
-	github.com/kuaileniu/gopanic v1.0.0 // indirect
 	github.com/kuaileniu/zio v1.0.0 // indirect
 	github.com/kuaileniu/znum v1.1.0 // indirect
 	github.com/kuaileniu/zstring v1.0.6 // indirect
@@ -58,18 +60,19 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/syndtr/goleveldb v1.0.0 // indirect
 	github.com/tealeg/xlsx v1.0.5 // indirect
-	github.com/tidwall/gjson v1.6.3 // indirect
-	github.com/tidwall/match v1.0.1 // indirect
-	github.com/tidwall/pretty v1.0.2 // indirect
+	github.com/tidwall/gjson v1.9.1 // indirect
+	github.com/tidwall/match v1.0.3 // indirect
+	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/ugorji/go/codec v1.1.7 // indirect
 	github.com/xormplus/builder v0.0.0-20200331055651-240ff40009be // indirect
 	github.com/xormplus/core v0.0.0-20200308074340-f3bce19d5f31 // indirect
 	github.com/xormplus/xorm v0.0.0-20201213020207-d4eee8f4037a // indirect
-	go.uber.org/atomic v1.6.0 // indirect
-	go.uber.org/multierr v1.5.0 // indirect
-	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9 // indirect
-	golang.org/x/sys v0.0.0-20200930185726-fdedc70b468f // indirect
-	golang.org/x/text v0.3.4 // indirect
+	go.uber.org/atomic v1.7.0 // indirect
+	go.uber.org/multierr v1.6.0 // indirect
+	golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97 // indirect
+	golang.org/x/sys v0.0.0-20210615035016-665e8c7367d1 // indirect
+	golang.org/x/text v0.3.6 // indirect
+	google.golang.org/protobuf v1.23.0 // indirect
 	gopkg.in/flosch/pongo2.v3 v3.0.0-20141028000813-5e81b817a0c4 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c // indirect
+	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )

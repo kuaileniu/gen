@@ -229,6 +229,12 @@ func Get{{.PoName}}Page(c *gin.Context) {
 		{{- end }}
 	}
 
+	{{- if .VoPropSli}}
+		wg := pool.NewWaitGroup({{len .VoPropSli}})
+	{{- end }}
+	{{- if .VoPropSli}}
+	    wg.Wait()
+	{{- end }}
 	c.JSON(http.StatusOK, (&ctx.PageResp{Total: total}).SetData(voSli)) //分页结果
 }
 {{- end}}
