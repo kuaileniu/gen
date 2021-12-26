@@ -68,13 +68,18 @@ type Table struct {
 }
 
 type VoProp struct{
+	// vo_prop_sli:
 	// ## vo 对应的属性
 	// ## vo json 显示名称
-	// - vo_prop_show: ReportGroupingName
-	//   vo_prop_key: ReportGroupingId
+	// - vo_show: ReportGroupingName
+	//   # 查 vo_prop_show 依赖的vo中的属性
+	//   vo_dependent: ReportGroupingId
+	//   # PO 名称
 	//   po: JtblReportGrouping
+	//   # po 的主键对应的名称
 	//   po_key_name: Id
-	//   po_key_col: ReportGroupingName
+	//   # po 中对应 vo_show 的字段
+	//   po_dependent: ReportGroupingName
 
 	// vo 中显示给前端的属性名称
 	VoShow string `yaml:"vo_show"`
