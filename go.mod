@@ -17,6 +17,7 @@ require (
 
 require (
 	github.com/gin-gonic/gin v1.7.4
+	github.com/jinzhu/copier v0.3.4
 	github.com/kuaileniu/db v1.0.1
 	github.com/kuaileniu/id v0.0.6
 	github.com/kuaileniu/ztype v1.2.1

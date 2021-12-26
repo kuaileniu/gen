@@ -213,6 +213,9 @@ func Get{{.PoName}}Page(c *gin.Context) {
 		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "查询数据发生异常请稍后重试", EnglishMsg: "Error occurs when finding data"})
 		return
 	}
+	{{- range .VoPropSli}}
+	{{.VoDependent}}Sli := make([]int64, 0)
+	{{- end }}
 	type VO struct {
 		model.{{.PoName}}
 	}
@@ -221,6 +224,9 @@ func Get{{.PoName}}Page(c *gin.Context) {
 		vo := VO{}
 		copier.Copy(&vo, &(poSli[i]))
 		voSli[i] = vo
+		{{- range .VoPropSli}}
+		sliceutil.AddNoRepeatInt64(&{{.VoDependent}}Sli, vo.{{.VoDependent}})
+		{{- end }}
 	}
 
 	c.JSON(http.StatusOK, (&ctx.PageResp{Total: total}).SetData(voSli)) //分页结果
