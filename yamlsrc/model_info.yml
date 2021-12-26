@@ -20,6 +20,8 @@ table_list:
       ## vo 对应的属性
       ## vo json 显示名称
       - vo_show: ReportGroupingName
+        # json 属性的类型
+        vo_show_type: string
         # 查 vo_prop_show 依赖的vo中的属性
         vo_dependent: ReportGroupingId
         # PO 名称

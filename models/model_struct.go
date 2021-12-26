@@ -67,11 +67,13 @@ type Table struct {
 	VoPropSli []VoProp `json:"vo_prop_sli" yaml:"vo_prop_sli"`
 }
 
-type VoProp struct{
+type VoProp struct {
 	// vo_prop_sli:
 	// ## vo 对应的属性
 	// ## vo json 显示名称
 	// - vo_show: ReportGroupingName
+	//   # json 属性的类型
+	//   vo_show_type: string
 	//   # 查 vo_prop_show 依赖的vo中的属性
 	//   vo_dependent: ReportGroupingId
 	//   # PO 名称
@@ -82,7 +84,8 @@ type VoProp struct{
 	//   po_dependent: ReportGroupingName
 
 	// vo 中显示给前端的属性名称
-	VoShow string `yaml:"vo_show"`
+	VoShow     string `yaml:"vo_show"`
+	VoShowType string `yaml:"vo_show_type"`
 	// 查 vo_prop_show 依赖的vo中的属性
 	VoDependent string `yaml:"vo_dependent"`
 	// PO 名称
