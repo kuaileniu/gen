@@ -84,8 +84,11 @@ type VoProp struct {
 	//   po_dependent: ReportGroupingName
 
 	// vo 中显示给前端的属性名称
-	VoShow     string `yaml:"vo_show"`
-	VoShowType string `yaml:"vo_show_type"`
+	VoShow        string `yaml:"vo_show"`
+	// vo属性的类型
+	VoShowType    string `yaml:"vo_show_type"`
+	// vo属性的注释
+	VoShowComment string `yaml:"vo_show_comment"`
 	// 查 vo_prop_show 依赖的vo中的属性
 	VoDependent string `yaml:"vo_dependent"`
 	// PO 名称
