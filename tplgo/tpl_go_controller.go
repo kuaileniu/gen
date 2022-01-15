@@ -219,6 +219,7 @@ func Get{{.PoName}}Page(c *gin.Context) {
 	type VO struct {
 		model.{{.PoName}}
 		{{- range .VoPropSli}}
+		// {{.VoShowComment}}
 		{{.VoShow}} {{.VoShowType}}
 		{{- end }}
 	}

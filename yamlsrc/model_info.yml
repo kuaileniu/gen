@@ -22,6 +22,8 @@ table_list:
       - vo_show: ReportGroupingName
         # json 属性的类型
         vo_show_type: string
+        # vo 属性的注释
+        vo_show_comment: 报告组名称
         # 查 vo_prop_show 依赖的vo中的属性
         vo_dependent: ReportGroupingId
         # PO 名称
