@@ -16,9 +16,26 @@ table_list:
     search_sli:
       - LineName
       - LineDescription
+    vo_multi_prop_sli:
+        # PO 名称
+      - target_po: JtblReportGrouping
+        # po 的主键对应的名称
+        po_key_name: Id 
+        multi_prop: 
+        # vo json 显示名称
+        - vo_show: ReportGroupingName
+          # json 属性的类型
+          vo_show_type: string
+          # vo 属性的注释
+          vo_show_comment: 报告组名称
+          # 查 vo_show 的数据源时所依赖vo的属性名称
+          ref_prop_in_vo: ReportGroupingId
+          # vo_show 的数据来源,po 中对应 vo_show 的字段
+          the_po_prop_for_vo_show: ReportGroupingName
+        
     vo_prop_sli:
-      ## vo 对应的属性
-      ## vo json 显示名称
+      # vo 对应的属性
+      # vo json 显示名称
       - vo_show: ReportGroupingName
         # json 属性的类型
         vo_show_type: string

@@ -63,8 +63,16 @@ type Table struct {
 	MarkCannotDel string `json:"mark_cannot_del" yaml:"mark_cannot_del"`
 	// 查询字段 []{AreaName,AreaDescription}
 	SearchSli []string `json:"search_sli" yaml:"search_sli"`
-	// vo 属性数组
+	// Deprecated
+	// vo 属性数组,适合 根据外键只取同一个关联表中的一列场景，不适合取同一个关联表中的多列场景
 	VoPropSli []VoProp `json:"vo_prop_sli" yaml:"vo_prop_sli"`
+	
+	// multiple
+	// vo 属性数组,适合 根据外键取同一个关联表中的多列场景
+	VoMultiPropSli []VoMultiProp `yaml:"vo_multi_prop_sli"`
+}
+
+type VoMultiProp struct {
 }
 
 type VoProp struct {
