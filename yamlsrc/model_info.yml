@@ -30,8 +30,8 @@ table_list:
           vo_show_comment: 报告组名称
           # 查 vo_show 的数据源时所依赖vo的属性名称
           ref_prop_in_vo: ReportGroupingId
-          # vo_show 的数据来源,po 中对应 vo_show 的字段
-          the_po_prop_for_vo_show: ReportGroupingName
+          # vo_show 的数据来源,po 中对应 vo_show 数据的字段
+          the_po_prop: ReportGroupingName
         
     vo_prop_sli:
       # vo 对应的属性
