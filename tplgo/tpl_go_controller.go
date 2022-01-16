@@ -216,6 +216,9 @@ func Get{{.PoName}}Page(c *gin.Context) {
 	{{- range .VoPropSli}}
 	{{.VoDependent}}Sli := make([]int64, 0)
 	{{- end }}
+	{{- range .VoMultiPropSli}}
+	{{.RefPropInVo}}Sli := make([]int64, 0)
+	{{- end }}
 	type VO struct {
 		model.{{.PoName}}
 		{{- range .VoPropSli}}
@@ -237,10 +240,16 @@ func Get{{.PoName}}Page(c *gin.Context) {
 		{{- range .VoPropSli}}
 		sliceutil.AddNoRepeatInt64(&{{.VoDependent}}Sli, vo.{{.VoDependent}})
 		{{- end }}
+		{{- range .VoMultiPropSli}}
+		sliceutil.AddNoRepeatInt64(&{{.RefPropInVo}}Sli, vo.{{.RefPropInVo}})
+		{{- end }}
 	}
 
 	{{- if .VoPropSli}}
 		wg := pool.NewWaitGroup({{len .VoPropSli}})
+	{{- end }}
+	{{- if .VoMultiPropSli}}
+		wg := pool.NewWaitGroup({{len .VoMultiPropSli}})
 	{{- end }}
 	{{- range .VoPropSli}}
 	 	wg.Add(func(){
@@ -263,6 +272,9 @@ func Get{{.PoName}}Page(c *gin.Context) {
 		 })
 	{{- end }}
 	{{- if .VoPropSli}}
+	    wg.Wait()
+	{{- end }}
+	{{- if .VoMultiPropSli}}
 	    wg.Wait()
 	{{- end }}
 	c.JSON(http.StatusOK, (&ctx.PageResp{Total: total}).SetData(voSli)) //分页结果

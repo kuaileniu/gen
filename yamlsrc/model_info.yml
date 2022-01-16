@@ -556,6 +556,8 @@ table_list:
       - target_po: JtblPressureGuage
         # po 的主键对应的名称
         target_po_key: Id 
+        # 查 vo_show 的数据源时所依赖vo的属性名称
+        ref_prop_in_vo: PressureGuageId1
         multi_prop: 
         # vo json 显示名称
         - vo_show: PressureGuageSerNo1
@@ -565,8 +567,6 @@ table_list:
           vo_show_type: string
           # vo 属性的注释
           vo_show_comment: 压力表序列号1
-          # 查 vo_show 的数据源时所依赖vo的属性名称
-          ref_prop_in_vo: PressureGuageId1
           # vo_show 的数据来源,po 中对应 vo_show 数据的字段
           the_po_prop: SerialNumber      
         - vo_show: CalibrationCertNo1
@@ -576,13 +576,13 @@ table_list:
           vo_show_type: string
           # vo 属性的注释
           vo_show_comment: 校验证书号1
-          # 查 vo_show 的数据源时所依赖vo的属性名称
-          ref_prop_in_vo: PressureGuageId1
           # vo_show 的数据来源,po 中对应 vo_show 数据的字段
           the_po_prop: CalibrationCertNo      
       - target_po: JtblPressureGuage
         # po 的主键对应的名称
         target_po_key: Id 
+        # 查 vo_show 的数据源时所依赖vo的属性名称
+        ref_prop_in_vo: PressureGuageId2
         multi_prop: 
         # vo json 显示名称
         - vo_show: PressureGuageSerNo2
@@ -592,8 +592,6 @@ table_list:
           vo_show_type: string
           # vo 属性的注释
           vo_show_comment: 压力表序列号2
-          # 查 vo_show 的数据源时所依赖vo的属性名称
-          ref_prop_in_vo: PressureGuageId2
           # vo_show 的数据来源,po 中对应 vo_show 数据的字段
           the_po_prop: SerialNumber      
         - vo_show: CalibrationCertNo2
@@ -603,8 +601,6 @@ table_list:
           vo_show_type: string
           # vo 属性的注释
           vo_show_comment: 校验证书号2
-          # 查 vo_show 的数据源时所依赖vo的属性名称
-          ref_prop_in_vo: PressureGuageId2
           # vo_show 的数据来源,po 中对应 vo_show 数据的字段
           the_po_prop: CalibrationCertNo      
      
