@@ -222,6 +222,12 @@ func Get{{.PoName}}Page(c *gin.Context) {
 		// {{.VoShowComment}}
 		{{.VoShow}} {{.VoShowType}}
 		{{- end }}
+		{{- range .VoMultiPropSli}}
+			{{- range .MultiPropSli}}
+			// {{.VoShowComment}}
+			{{.VoShow}} {{.VoShowType}} {{.VoShowTag}}
+			{{- end}}
+		{{- end}}
 	}
 	voSli := make([]VO, len(poSli))
 	for i := 0; i < len(poSli); i++ {

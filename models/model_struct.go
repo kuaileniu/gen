@@ -66,13 +66,64 @@ type Table struct {
 	// Deprecated
 	// vo 属性数组,适合 根据外键只取同一个关联表中的一列场景，不适合取同一个关联表中的多列场景
 	VoPropSli []VoProp `json:"vo_prop_sli" yaml:"vo_prop_sli"`
-	
+
 	// multiple
 	// vo 属性数组,适合 根据外键取同一个关联表中的多列场景
 	VoMultiPropSli []VoMultiProp `yaml:"vo_multi_prop_sli"`
 }
 
 type VoMultiProp struct {
+	// 	vo_multi_prop_sli:
+	// 	# PO 名称
+	//   - target_po: JtblReportGrouping
+	// 	# po 的主键对应的名称
+	// 	target_po_key: Id
+	// 	multi_prop:
+	// 	# vo json 显示名称
+	// 	- vo_show: ReportGroupingName
+	// 	  # json 属性的类型
+	// 	  vo_show_type: string
+	// 	  # vo 属性的注释
+	// 	  vo_show_comment: 报告组名称
+	// 	  # 查 vo_show 的数据源时所依赖vo的属性名称
+	// 	  ref_prop_in_vo: ReportGroupingId
+	// 	  # vo_show 的数据来源,po 中对应 vo_show 数据的字段
+	// 	  the_po_prop: ReportGroupingName
+
+	// PO 名称
+	TargetPo     string      `yaml:"target_po"`
+	MultiPropSli []MultiProp `yaml:"multi_prop"`
+}
+
+type MultiProp struct {
+	//vo_multi_prop_sli:
+	// 	# PO 名称
+	//   - target_po: JtblPressureGuage
+	// 	# po 的主键对应的名称
+	// 	target_po_key: Id
+	// 	multi_prop:
+	// 	# vo json 显示名称
+	// 	- vo_show: PressureGuageSerNo1
+	// 	  # vo tag,外侧是单引号，内部是左上角的撇符号
+	// 	  vo_show_tag: aaaaa
+	// 	  # json 属性的类型
+	// 	  vo_show_type: string
+
+	// 	  # vo 属性的注释
+	// 	  vo_show_comment: 压力表序列号1
+
+	// 	  # 查 vo_show 的数据源时所依赖vo的属性名称
+	// 	  ref_prop_in_vo: PressureGuageId1
+	// 	  # vo_show 的数据来源,po 中对应 vo_show 数据的字段
+	// 	  the_po_prop: SerialNumber
+	// vo 中显示给前端的属性名称
+	VoShow string `yaml:"vo_show"`
+	// vo属性的类型
+	VoShowType string `yaml:"vo_show_type"`
+	// vo tag,外侧是单引号，内部是左上角的撇符号
+	VoShowTag string `yaml:"vo_show_tag"`
+	// vo属性的注释
+	VoShowComment string `yaml:"vo_show_comment"`
 }
 
 type VoProp struct {
@@ -92,9 +143,9 @@ type VoProp struct {
 	//   po_dependent: ReportGroupingName
 
 	// vo 中显示给前端的属性名称
-	VoShow        string `yaml:"vo_show"`
+	VoShow string `yaml:"vo_show"`
 	// vo属性的类型
-	VoShowType    string `yaml:"vo_show_type"`
+	VoShowType string `yaml:"vo_show_type"`
 	// vo属性的注释
 	VoShowComment string `yaml:"vo_show_comment"`
 	// 查 vo_prop_show 依赖的vo中的属性
