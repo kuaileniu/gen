@@ -271,6 +271,26 @@ func Get{{.PoName}}Page(c *gin.Context) {
 			}
 		 })
 	{{- end }}
+	{{- range .VoMultiPropSli}}
+	 	wg.Add(func(){
+			poMap := make(map[int64]*model.{{.TargetPo}})
+			if err := db.Engine.In(model.{{.TargetPo}}_{{.TargetPoKey}}_DB, {{.RefPropInVo}}Sli).Cols({{.SelectColumn}}).Find(&poMap); err != nil {
+				zap.L().Error("查询 {{.TargetPo}} 表时发生异常", zap.Error(err))
+				c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "查询数据发生异常请稍后重试", EnglishMsg: "Error occurs when finding data"})
+				return
+			}
+			for i := 0; i < len(voSli); i++ {
+				voPtr := &voSli[i]
+				id := voPtr.{{.RefPropInVo}}
+				if id > 0 {
+					POPtr := poMap[id]
+					if POPtr != nil {
+						voPtr.{{.VoShow}} = POPtr.{{.PoDependent}}
+					}
+				}
+			}
+		 })
+	{{- end }}
 	{{- if .VoPropSli}}
 	    wg.Wait()
 	{{- end }}

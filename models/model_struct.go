@@ -1,5 +1,7 @@
 package models
 
+import "strings"
+
 type Column struct {
 	// 是主键
 	IsKey bool   `json:"is_key" yaml:"is_key"`
@@ -76,7 +78,7 @@ type Table struct {
 // wg := pool.NewWaitGroup({{$table.MultiPropSize}})
 // vo 中
 func (table Table) MultiPropSize() int64 {
-	return 19
+	return 19 // 此方法未使用，19数据为随意乱造
 }
 
 type VoMultiProp struct {
@@ -98,11 +100,24 @@ type VoMultiProp struct {
 	// 	  the_po_prop: ReportGroupingName
 
 	// PO 名称
-	TargetPo string `yaml:"target_po"`
+	TargetPo    string `yaml:"target_po"`
+	TargetPoKey string `yaml:"target_po_key"`
 	// 查 vo_show 的数据源时所依赖vo的属性名称
 	RefPropInVo string `yaml:"ref_prop_in_vo"`
 
 	MultiPropSli []MultiProp `yaml:"multi_prop"`
+}
+
+func (p VoMultiProp) SelectColumn() string {
+	// if err := db.Engine.In(model.{{.TargetPo}}_{{.TargetPoKey}}_DB, {{.RefPropInVo}}Sli).Cols(model.{{.TargetPo}}_{{.TargetPoKey}}_DB, model.{{.TargetPo}}_{{.PoDependent}}_DB).Find(&poMap); err != nil {
+	columnSli := make([]string, 0)
+	TargetPo := p.TargetPo
+
+	columnSli = append(columnSli, "model."+TargetPo+"_"+p.TargetPoKey+"_DB")
+	for _,prop:=range p.MultiPropSli{
+		columnSli = append(columnSli, "model."+TargetPo+"_"+prop.ThePoProp+"_DB")
+	}
+	return strings.Join(columnSli, ", ")
 }
 
 type MultiProp struct {
@@ -170,6 +185,8 @@ type MultiProp struct {
 	VoShowTag string `yaml:"vo_show_tag"`
 	// vo属性的注释
 	VoShowComment string `yaml:"vo_show_comment"`
+	// vo_show 的数据来源,po 中对应 vo_show 数据的字段
+	ThePoProp string `yaml:"the_po_prop"`
 }
 
 type VoProp struct {
