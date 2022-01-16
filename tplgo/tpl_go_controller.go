@@ -285,7 +285,9 @@ func Get{{.PoName}}Page(c *gin.Context) {
 				if id > 0 {
 					POPtr := poMap[id]
 					if POPtr != nil {
-						voPtr.{{.VoShow}} = POPtr.{{.PoDependent}}
+						{{- range .MultiPropSli}}
+						voPtr.{{.VoShow}} = POPtr.{{.ThePoProp}}
+						{{- end}}
 					}
 				}
 			}
