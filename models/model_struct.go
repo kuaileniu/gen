@@ -8,8 +8,10 @@ type Column struct {
 	PK    string `json:"-" yaml:"-"` //在go代码中根据 IsKey 推导出 是"pk"或空
 	// Omitempty string `json:"omit"`// json中omitempty是关键词，不能用于读取数据进来
 	Omitempty string `json:"omitempty" yaml:"omitempty"` // json中omitempty是关键词，不能用于读取数据进来
+	// 唯一索引名字
+	Unique string `json:"unique" yaml:"unique"` //   unique: unique;unique: unique(uniquename)
 	// 索引名字
-	Unique string `json:"unique" yaml:"unique"`
+	Index string `json:"index" yaml:"index"` //   index: index; index: index(indexname)
 	// go，java对应的属性名字
 	PropName string `json:"prop_name" yaml:"prop_name"`
 	// 是外键
@@ -114,7 +116,7 @@ func (p VoMultiProp) SelectColumn() string {
 	TargetPo := p.TargetPo
 
 	columnSli = append(columnSli, "model."+TargetPo+"_"+p.TargetPoKey+"_DB")
-	for _,prop:=range p.MultiPropSli{
+	for _, prop := range p.MultiPropSli {
 		columnSli = append(columnSli, "model."+TargetPo+"_"+prop.ThePoProp+"_DB")
 	}
 	return strings.Join(columnSli, ", ")

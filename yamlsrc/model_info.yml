@@ -628,12 +628,14 @@ table_list:
         # 代码中处理不可为空
         app_notnull: notnull
         omitempty: omitempty
+        index: index(i_1)
       - prop_name: HTReportNo
         prop_type: string
         prop_comment: 报告号
         column_name: a2
         # 代码中处理不可重复
         app_notrepeat: notrepeat
+        unique: unique
       - prop_name: TestCompanyCode
         prop_type: string
         prop_comment: 测试公司代码
