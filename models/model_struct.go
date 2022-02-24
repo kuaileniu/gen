@@ -27,7 +27,7 @@ type Column struct {
 	//代码中判断不可重复
 	AppNotRepeat string `json:"app_notrepeat" yaml:"app_notrepeat"` // "app_notrepeat": app_notrepeat,
 	// 数据库对应的字段名字
-	ColumnName string `json:"column_name" yaml:"column_name"`  //在数据库中不需要建立字段时 column_name: '-'
+	ColumnName string `json:"column_name" yaml:"column_name"` //在数据库中不需要建立字段时 column_name: '-'
 	//列类型
 	ColumnType string `json:"column_type" yaml:"column_type"` // 如果没传入值则在go代码中（非模板中）根据PropType推导出来
 	// 设置默认生成时间created 或 updated， xorm:"CreateTime timestamp created"` " xorm:"ModifyTime timestamp updated"`
