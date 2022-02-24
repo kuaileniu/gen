@@ -144,11 +144,11 @@ func Edit{{.PoName}}(c *gin.Context) {
 		{{ end -}}
 		if e != nil {
 			zap.L().Error("根据 {{.PropName}} 查询 {{$table.PoName}} 时异常", zap.Error(e))
-			c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "添加失败。", EnglishMsg: "Add failed"})
+			c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "修改失败。", EnglishMsg: "Edit failed"})
 			return
 		}
 		if exist {
-			c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "添加失败,{{.PropComment}}重复。", EnglishMsg: "Add failed,duplicate {{.PropName}}."})
+			c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "修改失败,{{.PropComment}}重复。", EnglishMsg: "Edit failed,duplicate {{.PropName}}."})
 			return
 		}{{- end -}}{{/*判断数据不重复*/}}
 	}
