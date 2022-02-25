@@ -46,9 +46,9 @@ func Add{{.PoName}}(c *gin.Context) {
 	{{- if eq .AppNotRepeat "notrepeat" }}
 	{
 		{{ if  $table.ZoneKey -}}
-		exist, e := db.Engine.In(model.{{$table.PoName}}_{{$table.ZoneKey}}_DB, req.JobId).Exist(&model.{{$table.PoName}}{ {{- .PropName}}: req.{{.PropName}} })
+		exist, e := db.Engine({{$.Engine_name}}).In(model.{{$table.PoName}}_{{$table.ZoneKey}}_DB, req.JobId).Exist(&model.{{$table.PoName}}{ {{- .PropName}}: req.{{.PropName}} })
 		{{ else }}
-		exist, e := db.Engine.Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
+		exist, e := db.Engine({{$.Engine_name}}).Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
 		{{ end -}}
 		if e != nil {
 			zap.L().Error("根据 {{.PropName}} 查询 {{$table.PoName}} 时异常", zap.Error(e))
@@ -76,7 +76,7 @@ func Add{{.PoName}}(c *gin.Context) {
 	po.CanDel = true
 	{{- end }}
 	{{- end }}   {{/*单独设置 Id CreatedBy,CanDel */}}
-	if _, err := db.Engine.Insert(&po); err != nil {
+	if _, err := db.Engine({{$.Engine_name}}).Insert(&po); err != nil {
 		zap.L().Error("添加 {{$table.PoName}} 时异常", zap.Error(err))
 		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "添加失败", EnglishMsg: "Add failed"})
 		return
@@ -98,7 +98,7 @@ func Del{{.PoName}}(c *gin.Context) {
 		return
 	}
 
-	if _, err := db.Engine.NewSession().In(model.{{$table.PoName}}_Id_DB, req.Ids).And(model.{{$table.PoName}}_CanDel_DB + "=true").Delete(model.{{$table.PoName}}Ptr); err != nil {
+	if _, err := db.Engine({{$.Engine_name}}).NewSession().In(model.{{$table.PoName}}_Id_DB, req.Ids).And(model.{{$table.PoName}}_CanDel_DB + "=true").Delete(model.{{$table.PoName}}Ptr); err != nil {
 		zap.L().Error("删除 {{$table.PoName}} 时异常", zap.Error(err))
 		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "删除失败。", EnglishMsg: "Failed."})
 		return
@@ -118,7 +118,7 @@ func Edit{{.PoName}}(c *gin.Context) {
 	}
 
 	po := model.{{.PoName}}{Id: req.Id}
-	session := db.Engine.NewSession()
+	session := db.Engine({{$.Engine_name}}).NewSession()
 
 	{{- range .ColumnList -}}{{/* 判断前端是否传值过来*/}}
 	{{- if or .IsKey (eq .PropName "CreatedBy") (eq .PropName "ModifiedBy") (eq .PropName "CreateTime") (eq .PropName  "ModifyTime") (eq .PropName "CanDel") }}
@@ -147,9 +147,9 @@ func Edit{{.PoName}}(c *gin.Context) {
 		{{- end}}{{/*判断必传参数必须存在*/}}
 		{{- if eq .AppNotRepeat "notrepeat" }} {{/*判断数据不重复*/}}
 		{{ if  $table.ZoneKey -}}
-		exist, e := db.Engine.In(model.{{$table.PoName}}_{{$table.ZoneKey}}_DB, req.JobId).NotIn(model.{{$table.PoName}}_Id_DB,req.Id).Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
+		exist, e := db.Engine({{$.Engine_name}}).In(model.{{$table.PoName}}_{{$table.ZoneKey}}_DB, req.JobId).NotIn(model.{{$table.PoName}}_Id_DB,req.Id).Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
 		{{ else }}
-		exist, e := db.Engine.Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
+		exist, e := db.Engine({{$.Engine_name}}).Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
 		{{ end -}}
 		if e != nil {
 			zap.L().Error("根据 {{.PropName}} 查询 {{$table.PoName}} 时异常", zap.Error(e))
@@ -195,7 +195,7 @@ func Get{{.PoName}}Page(c *gin.Context) {
 	}
 	{{- end }}
 	poSli := make([]model.{{.PoName}}, 0)
-	session := db.Engine.NewSession()
+	session := db.Engine({{$.Engine_name}}).NewSession()
 	if req.Search != "" {
 		{{- range .SearchSli}}
 		session.Or(model.{{$table.PoName}}_{{.}}_DB + " like ?","%"+req.Search+"%" )
@@ -263,7 +263,7 @@ func Get{{.PoName}}Page(c *gin.Context) {
 	{{- range .VoPropSli}}
 	 	wg.Add(func(){
 			poMap := make(map[int64]*model.{{.Po}})
-			if err := db.Engine.In(model.{{.Po}}_{{.PoKeyName}}_DB, {{.VoDependent}}Sli).Cols(model.{{.Po}}_{{.PoKeyName}}_DB, model.{{.Po}}_{{.PoDependent}}_DB).Find(&poMap); err != nil {
+			if err := db.Engine({{$.Engine_name}}).In(model.{{.Po}}_{{.PoKeyName}}_DB, {{.VoDependent}}Sli).Cols(model.{{.Po}}_{{.PoKeyName}}_DB, model.{{.Po}}_{{.PoDependent}}_DB).Find(&poMap); err != nil {
 				zap.L().Error("查询 {{.Po}} 表时发生异常", zap.Error(err))
 				c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "查询数据发生异常请稍后重试", EnglishMsg: "Error occurs when finding data"})
 				return
@@ -283,7 +283,7 @@ func Get{{.PoName}}Page(c *gin.Context) {
 	{{- range .VoMultiPropSli}}
 	 	wg.Add(func(){
 			poMap := make(map[int64]*model.{{.TargetPo}})
-			if err := db.Engine.In(model.{{.TargetPo}}_{{.TargetPoKey}}_DB, {{.RefPropInVo}}Sli).Cols({{.SelectColumn}}).Find(&poMap); err != nil {
+			if err := db.Engine({{$.Engine_name}}).In(model.{{.TargetPo}}_{{.TargetPoKey}}_DB, {{.RefPropInVo}}Sli).Cols({{.SelectColumn}}).Find(&poMap); err != nil {
 				zap.L().Error("查询 {{.TargetPo}} 表时发生异常", zap.Error(err))
 				c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "查询数据发生异常请稍后重试", EnglishMsg: "Error occurs when finding data"})
 				return

@@ -226,10 +226,10 @@ type VoProp struct {
 type ModelInfo struct {
 	PackageName string `json:"package_name" yaml:"package_name"`
 
-	TableList  []Table  `json:"table_list" yaml:"table_list"`
-	ImportList []string `json:"-"`
-
-	PackageController    string `json:"package_controller" yaml:"package_controller"`
+	TableList            []Table  `json:"table_list" yaml:"table_list"`
+	ImportList           []string `json:"-"`
+	Engine_name          string   `json:"engine_name" yaml:"engine_name"`
+	PackageController    string   `json:"package_controller" yaml:"package_controller"`
 	ControllerImportList []string
 	ModelPath            string `yaml:"model_path"`
 }
