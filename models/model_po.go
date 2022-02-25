@@ -2,15 +2,21 @@ package models
 
 import (
 	"bytes"
+	_ "embed"
 	"log"
 	"strings"
 	"text/template"
 
-	"github.com/kuaileniu/gen/tplgo"
 	"github.com/kuaileniu/sliceutil"
 	"github.com/kuaileniu/zfile"
 	"go.uber.org/zap"
 )
+
+//go:embed tpl_go_controller.tmpl
+var tpl_go_controller_tmpl string
+
+//go:embed tpl_go_model.tmpl
+var tpl_go_model_tmpl string
 
 //数据库对应的类型，例如：varchar
 // type ColumnType string
@@ -19,7 +25,9 @@ import (
 type PropType string
 
 func (info *ModelInfo) CreatePoModel(pathFile string) error {
-	tmpl, err := template.New("model").Parse(tplgo.PoModelTmpl)
+	// tmpl, err := template.New("model").Parse(tplgo.PoModelTmpl)
+	tmpl, err := template.New("model").Parse(tpl_go_model_tmpl)
+	// tmpl, err := template.New("model").Parse("")
 	var buf bytes.Buffer
 	err = tmpl.Execute(&buf, info)
 
@@ -32,7 +40,8 @@ func (info *ModelInfo) CreateControllerModel(pathFile string) error {
 		zap.L().Info("未设置生成 controller 文件的存储位置")
 		return nil
 	}
-	tmpl, err := template.New("controller").Parse(tplgo.ControllerModelTmpl)
+	// tmpl, err := template.New("controller").Parse(tplgo.ControllerModelTmpl)
+	tmpl, err := template.New("controller").Parse(tpl_go_controller_tmpl)
 	var buf bytes.Buffer
 	err = tmpl.Execute(&buf, info)
 

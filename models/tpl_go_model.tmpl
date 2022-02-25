@@ -1,6 +1,6 @@
 package tplgo
 
-var PoModelTmpl = `package {{.PackageName}}
+package {{.PackageName}}
 {{- if .ImportList}}
 
 import (
@@ -28,7 +28,7 @@ type {{$table.PoName}} struct {
 	// {{ .PropAllComment}}
 	{{- end }}
 	{{- end}}
-	{{.PropName}} {{.PropType}} ` + "`" + `json:"{{.JsonName}}{{.Omitempty}}" xorm:"{{.ColumnName}}{{.PK}} {{.ColumnType}}{{.ColumnTypeRange}}{{.DefaultTime}}{{.Notnull}}{{.Default}}{{.Unique}} {{.Index}}"` + "`" + `
+	{{.PropName}} {{.PropType}}   `json:"{{.JsonName}}{{.Omitempty}}" xorm:"{{.ColumnName}}{{.PK}} {{.ColumnType}}{{.ColumnTypeRange}}{{.DefaultTime}}{{.Notnull}}{{.Default}}{{.Unique}} {{.Index}}"`
 	{{- end}}
 }
 
@@ -45,4 +45,4 @@ const (
 {{- end}}
 )
 {{- end}}
-{{end}}`
+{{end}}

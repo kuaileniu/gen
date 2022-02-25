@@ -1,6 +1,4 @@
-package tplgo
-
-var ControllerModelTmpl = `package {{.PackageController}}
+package {{.PackageController}}
 {{- if .ControllerImportList}}
 {{/* 注释是这么写 ,双花括号中的横线放最前面时，此段多出一个空行，放最后时无空行*/}} 
 import (
@@ -80,7 +78,7 @@ func Add{{.PoName}}(c *gin.Context) {
 
 func Del{{.PoName}}(c *gin.Context) {
 	req := struct {
-		Ids []int64  ` + "`" + `json:"Ids"` + "`" + `
+		Ids []int64  `json:"Ids"`
 	}{}
 	c.ShouldBindJSON(&req)
 
@@ -176,7 +174,7 @@ func Get{{.PoName}}Page(c *gin.Context) {
 	req := struct {
 		model.{{.PoName}}
 		ctx.Req
-		Search string ` + "`" + `json:"search"` + "`" + `
+		Search string  `json:"search"`
 	}{}
 	c.ShouldBindJSON(&req)
 	{{ if $table.ZoneKey }}
@@ -302,4 +300,4 @@ func Get{{.PoName}}Page(c *gin.Context) {
 	c.JSON(http.StatusOK, (&ctx.PageResp{Total: total}).SetData(voSli)) //分页结果
 }
 {{- end}}
-`
+
