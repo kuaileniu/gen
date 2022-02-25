@@ -2,6 +2,17 @@ package {{.PackageController}}
 {{- if .ControllerImportList}}
 {{/* 注释是这么写 ,双花括号中的横线放最前面时，此段多出一个空行，放最后时无空行*/}} 
 import (
+	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/copier"
+	"github.com/kuaileniu/id"
+	"github.com/kuaileniu/pool"
+	"github.com/kuaileniu/sliceutil"
+	"go.zhsit.cn/db/v2"
+	"go.zhsit.cn/zweb/ctx"
+	"go.zhsit.cn/zweb/enum"
+	"go.uber.org/zap"
+	"net/http"
+	"strings"
 	{{- range $v:= .ControllerImportList}}
 	"{{$v}}"
 	{{- end}}

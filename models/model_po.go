@@ -282,18 +282,18 @@ func (info *ModelInfo) CollectControllerImport() {
 	// 		}
 	// 	}
 	// }
-	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/gin-gonic/gin")
-	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/jinzhu/copier")
-	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/db")
+	// sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/gin-gonic/gin")
+	// sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/jinzhu/copier")
+	// sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/db")
 	sliceutil.AddNoRepeatStr(&info.ControllerImportList, info.ModelPath)
-	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/id")
-	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/pool")
-	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/sliceutil")
-	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "go.zhsit.cn/zweb/ctx")
-	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "go.zhsit.cn/zweb/enum")
-	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "go.uber.org/zap")
-	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "net/http")
-	sliceutil.AddNoRepeatStr(&info.ControllerImportList, "strings")
+	// sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/id")
+	// sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/pool")
+	// sliceutil.AddNoRepeatStr(&info.ControllerImportList, "github.com/kuaileniu/sliceutil")
+	// sliceutil.AddNoRepeatStr(&info.ControllerImportList, "go.zhsit.cn/zweb/ctx")
+	// sliceutil.AddNoRepeatStr(&info.ControllerImportList, "go.zhsit.cn/zweb/enum")
+	// sliceutil.AddNoRepeatStr(&info.ControllerImportList, "go.uber.org/zap")
+	// sliceutil.AddNoRepeatStr(&info.ControllerImportList, "net/http")
+	// sliceutil.AddNoRepeatStr(&info.ControllerImportList, "strings")
 }
 
 //字符串首字母转化为大写

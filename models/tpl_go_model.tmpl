@@ -1,8 +1,6 @@
-package tplgo
-
 package {{.PackageName}}
-{{- if .ImportList}}
 
+{{- if .ImportList}}
 import (
 	{{- range $v:= .ImportList}}
 	"{{$v}}"
