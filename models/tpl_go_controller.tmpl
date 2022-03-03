@@ -255,15 +255,18 @@ func Get{{.PoName}}Page(c *gin.Context) {
 	}
 
 	{{- if .VoPropSli}}
+		goOn := true
 		wg := pool.NewWaitGroup({{len .VoPropSli}})
 	{{- end }}
 	{{- if .VoMultiPropSli}}
+	    goOn := true
 		wg := pool.NewWaitGroup({{len .VoMultiPropSli}})
 	{{- end }}
 	{{- range .VoPropSli}}
 	 	wg.Add(func(){
 			poMap := make(map[int64]*model.{{.Po}})
 			if err := db.Engine({{$.Engine_name}}).In(model.{{.Po}}_{{.PoKeyName}}_DB, {{.VoDependent}}Sli).Cols(model.{{.Po}}_{{.PoKeyName}}_DB, model.{{.Po}}_{{.PoDependent}}_DB).Find(&poMap); err != nil {
+				goOn = false
 				zap.L().Error("查询 {{.Po}} 表时发生异常", zap.Error(err))
 				c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "查询数据发生异常请稍后重试", EnglishMsg: "Error occurs when finding data"})
 				return
@@ -284,6 +287,7 @@ func Get{{.PoName}}Page(c *gin.Context) {
 	 	wg.Add(func(){
 			poMap := make(map[int64]*model.{{.TargetPo}})
 			if err := db.Engine({{$.Engine_name}}).In(model.{{.TargetPo}}_{{.TargetPoKey}}_DB, {{.RefPropInVo}}Sli).Cols({{.SelectColumn}}).Find(&poMap); err != nil {
+				goOn = false
 				zap.L().Error("查询 {{.TargetPo}} 表时发生异常", zap.Error(err))
 				c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "查询数据发生异常请稍后重试", EnglishMsg: "Error occurs when finding data"})
 				return
@@ -307,6 +311,9 @@ func Get{{.PoName}}Page(c *gin.Context) {
 	{{- end }}
 	{{- if .VoMultiPropSli}}
 	    wg.Wait()
+		if !goOn {
+			return
+		}
 	{{- end }}
 	c.JSON(http.StatusOK, (&ctx.PageResp{Total: total}).SetData(voSli)) //分页结果
 }
