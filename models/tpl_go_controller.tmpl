@@ -13,6 +13,7 @@ import (
 	"go.uber.org/zap"
 	"net/http"
 	"strings"
+	"fmt"
 	{{- range $v:= .ControllerImportList}}
 	"{{$v}}"
 	{{- end}}
@@ -98,12 +99,13 @@ func Del{{.PoName}}(c *gin.Context) {
 		return
 	}
 
-	if _, err := db.Engine({{$.Engine_name}}).NewSession().In(model.{{$table.PoName}}_Id_DB, req.Ids).And(model.{{$table.PoName}}_CanDel_DB + "=true").Delete(model.{{$table.PoName}}Ptr); err != nil {
+	num, err := db.Engine({{$.Engine_name}}).NewSession().In(model.{{$table.PoName}}_Id_DB, req.Ids).And(model.{{$table.PoName}}_CanDel_DB + "=true").Delete(model.{{$table.PoName}}Ptr)
+	if err != nil {
 		zap.L().Error("删除 {{$table.PoName}} 时异常", zap.Error(err))
 		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "删除失败。", EnglishMsg: "Failed."})
 		return
 	}
-	c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusOkTip, Msg: "删除成功。", EnglishMsg: "Success."})
+	c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusOkTip, Msg: fmt.Sprint(num, " 条数据删除成功。"), EnglishMsg: fmt.Sprint(num, " success.")})
 }
 
 func Edit{{.PoName}}(c *gin.Context) {
