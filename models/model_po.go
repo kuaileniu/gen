@@ -100,6 +100,8 @@ func (info *ModelInfo) InferenceColumnType() {
 				col.ColumnType = "decimal"
 			} else if strings.EqualFold("ztype.Time", col.PropType) {
 				col.ColumnType = "timestamp"
+			} else if strings.EqualFold("ztype.Date", col.PropType) {
+				col.ColumnType = "timestamp"
 			} else if strings.EqualFold("bool", col.PropType) {
 			} else if strings.EqualFold("float64", col.PropType) {
 			} else if strings.EqualFold("zconst.KeYongStatus", col.PropType) {

@@ -108,6 +108,11 @@ table_list:
         column_name: z4
         json_name: '-'
         default: default(1)
+      - prop_name: ModifyDate
+        notnull: notnull
+        prop_type: ztype.Date
+        defalut_time: updated
+        column_name: z5        
 
 
   - po_name: JtblReportGrouping

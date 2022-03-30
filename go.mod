@@ -23,7 +23,7 @@ require (
 	github.com/kuaileniu/zio v1.0.0 // indirect
 	github.com/kuaileniu/znum v1.1.0 // indirect
 	github.com/kuaileniu/zstring v1.0.6 // indirect
-	github.com/kuaileniu/ztype v1.2.1 // indirect
+	github.com/kuaileniu/ztype v1.3.0 // indirect
 	github.com/natefinch/lumberjack v2.0.0+incompatible // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
