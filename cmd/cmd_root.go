@@ -6,6 +6,7 @@ import (
 )
 
 var language string
+// 回头参考下 https://github.com/gohade/hade/blob/main/app/console/kernel.go
 var rootCmd = &cobra.Command{
 	Use:   "gen",
 	Short: "gen is code generate for go or java language",
@@ -15,6 +16,8 @@ var rootCmd = &cobra.Command{
 		zap.L().Info("语言名称", zap.String("language", language))
 		zap.L().Debug("收到", zap.Any("root-args", args))
 	},
+	// 不需要出现cobra默认的completion子命令
+	// CompletionOptions: cobra.CompletionOptions{DisableDefaultCmd: true},
 }
 
 func Execute() error {
