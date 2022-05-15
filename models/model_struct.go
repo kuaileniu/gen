@@ -28,14 +28,15 @@ type Column struct {
 	AppNotRepeat string `json:"app_notrepeat" yaml:"app_notrepeat"` // "app_notrepeat": app_notrepeat,
 	// 数据库对应的字段名字
 	ColumnName string `json:"column_name" yaml:"column_name"` //在数据库中不需要建立字段时 column_name: '-'
-	//列类型
+	//列类型 column_type: 'DECIMAL(10,2)'
 	ColumnType string `json:"column_type" yaml:"column_type"` // 如果没传入值则在go代码中（非模板中）根据PropType推导出来
 	// 设置默认生成时间created 或 updated， xorm:"CreateTime timestamp created"` " xorm:"ModifyTime timestamp updated"`
 	DefaultTime string `json:"defalut_time" yaml:"defalut_time"`
 	//长度
 	Length string `json:"length" yaml:"length"`
-	//精度
+	//精度 可用 column_type: 'DECIMAL(10,2)' 替代
 	Precision string `json:"precision" yaml:"precision"`
+	// 可用 column_type: 'DECIMAL(10,2)' 替代
 	//数据库字段类型的范围varchar(25) 或 decimal(10,2) 中的 （25） （10,2)
 	ColumnTypeRange string // 在go中根据 ColumnType、Length、Precision 三个条件推断出来
 	//默认值
