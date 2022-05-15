@@ -16,6 +16,12 @@ var rootCmd = &cobra.Command{
 		zap.L().Info("语言名称", zap.String("language", language))
 		zap.L().Debug("收到", zap.Any("root-args", args))
 	},
+	// RunE: func(cmd *cobra.Command, args []string) error {
+	// 	// zap.L().Info("公用配置文件路径", zap.String("commonFile", commonFile))
+	// 	zap.L().Info("语言名称", zap.String("language", language))
+	// 	zap.L().Debug("收到", zap.Any("root-args", args))
+	// 	return nil
+	// },
 	// 不需要出现cobra默认的completion子命令
 	// CompletionOptions: cobra.CompletionOptions{DisableDefaultCmd: true},
 }
