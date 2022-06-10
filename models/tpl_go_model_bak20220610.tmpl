@@ -7,7 +7,11 @@ import (
 	{{- end}}
 )
 {{- end }}
+{{range $table:= .TableList}}
+// {{$table.TableName}} {{$table.PoComment}}
+var {{$table.PoName}}Ptr = &{{$table.PoName}}{}
 
+{{- end}}
 {{range $table:= .TableList}}
 func (po *{{.PoName}}) TableName() string {
 	return "{{.TableName}}"
