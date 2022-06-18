@@ -99,7 +99,7 @@ func Del{{.PoName}}(c *gin.Context) {
 		return
 	}
 
-	num, err := db.Engine({{$.Engine_name}}).NewSession().In(model.{{$table.PoName}}_Id_DB, req.Ids).And(model.{{$table.PoName}}_CanDel_DB + "=true").Delete(&model.{{$table.PoName}}{})
+	num, err := db.Session({{$.Engine_name}}).In(model.{{$table.PoName}}_Id_DB, req.Ids).Delete(&model.{{$table.PoName}}{})
 	if err != nil {
 		zap.L().Error("删除 {{$table.PoName}} 时异常", zap.Error(err))
 		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "删除失败。", EnglishMsg: "Failed."})
