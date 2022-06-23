@@ -74,7 +74,7 @@ func Add{{.PoName}}(c *gin.Context) {
 	po.CreatedBy = GetCurrentStaffName(c)
 	{{- end }}
 	{{- if eq .PropName "CanDel" }}
-	po.CanDel = true
+	{{/* po.CanDel = true */}} 
 	{{- end }}
 	{{- end }}   {{/*单独设置 Id CreatedBy,CanDel */}}
 	if _, err := db.Engine({{$.Engine_name}}).Insert(&po); err != nil {
