@@ -16,7 +16,7 @@ type Column struct {
 	PropName string `json:"prop_name" yaml:"prop_name"`
 	// 是外键
 	ForeignKey bool `json:"foreign_key" yaml:"foreign_key"`
-	// 配置出来，反推 columnType
+	// int64 *int64 bool *bool,配置出来，反推 columnType
 	PropType string `json:"prop_type" yaml:"prop_type"`
 	// 导出和导入json时的名字
 	JsonName string `json:"json_name" yaml:"json_name"`

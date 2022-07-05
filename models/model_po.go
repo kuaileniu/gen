@@ -21,7 +21,7 @@ var tpl_go_model_tmpl string
 //数据库对应的类型，例如：varchar
 // type ColumnType string
 
-// go，java开发语言对应的属性类型，例如int，uint32
+// go，java开发语言对应的属性类型，例如int，uint32 *int64 *bool
 type PropType string
 
 func (info *ModelInfo) CreatePoModel(pathFile string) error {
