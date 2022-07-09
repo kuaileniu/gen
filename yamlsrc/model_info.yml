@@ -13,10 +13,10 @@ table_list:
     # 范围Key的注释
     zone_key_comment: 项目ID
     # 修改标记为不能删除的go语句
-    mark_cannot_del : 'MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId,JtblReportGroupingId:po.ReportGroupingId})'
+    mark_cannot_del: "MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId,JtblReportGroupingId:po.ReportGroupingId})"
     search_sli:
       - LineName
-      - LineDescription        
+      - LineDescription
     vo_prop_sli:
       # vo 对应的属性
       # vo json 显示名称
@@ -106,14 +106,13 @@ table_list:
         prop_type: bool
         prop_comment: 能删除
         column_name: z4
-        json_name: '-'
+        json_name: "-"
         default: default(1)
       - prop_name: ModifyDate
         notnull: notnull
         prop_type: ztype.Date
         defalut_time: updated
-        column_name: z5        
-
+        column_name: z5
 
   - po_name: JtblReportGrouping
     table_name: aa
@@ -123,7 +122,7 @@ table_list:
     # 范围Key的注释
     zone_key_comment: 项目ID
     # 修改标记为不能删除的go语句
-    mark_cannot_del : 'MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId})'
+    mark_cannot_del: "MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId})"
     search_sli:
       - ReportGroupingName
       - CleaningSpec
@@ -174,8 +173,8 @@ table_list:
         prop_type: bool
         prop_comment: 能删除
         column_name: z4
-        json_name: '-'
-        default: default(1) 
+        json_name: "-"
+        default: default(1)
 
   - po_name: JtblArea
     table_name: a2
@@ -185,7 +184,7 @@ table_list:
     # 范围Key的注释
     zone_key_comment: 项目ID
     # 修改标记为不能删除的go语句
-    mark_cannot_del : 'MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId})'
+    mark_cannot_del: "MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId})"
     search_sli:
       - AreaName
       - AreaDescription
@@ -226,19 +225,19 @@ table_list:
         omitempty: omitempty
       - prop_name: LastCopiedSpool
         prop_type: int64
-        prop_comment: '最后复制管段号'
+        prop_comment: "最后复制管段号"
         column_name: a4
         omitempty: omitempty
       - prop_name: OnSkidArea
         prop_type: int64
-        prop_comment: '撬上区域'
+        prop_comment: "撬上区域"
         column_name: a5
         omitempty: omitempty
       - prop_name: DeliveryGroupId
         # 是外键
         foreign_key: true
         prop_type: int64
-        prop_comment: '发货组ID'
+        prop_comment: "发货组ID"
         column_name: a6
         omitempty: omitempty
       - prop_name: Spare1
@@ -285,7 +284,7 @@ table_list:
         prop_type: bool
         prop_comment: 能删除
         column_name: z4
-        json_name: '-'
+        json_name: "-"
         default: default(1)
 
   - po_name: Customer
@@ -342,8 +341,8 @@ table_list:
         prop_type: bool
         prop_comment: 能删除
         column_name: z4
-        json_name: '-'
-        default: default(1) 
+        json_name: "-"
+        default: default(1)
   - po_name: Staff
     table_name: a
     po_comment: 职员
@@ -467,7 +466,6 @@ table_list:
         omit: omitempty
         default: default(0)
 
-
   - po_name: JtblPressureGuage
     table_name: ag
     po_comment: 压力
@@ -476,10 +474,10 @@ table_list:
     # 范围Key的注释
     zone_key_comment: 项目ID
     # 修改标记为不能删除的go语句
-    mark_cannot_del : 'MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId})'
+    mark_cannot_del: "MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId})"
     search_sli:
       - SerialNumber
-      - CalibrationCertNo  
+      - CalibrationCertNo
     column_list:
       - prop_name: Id
         prop_type: int64
@@ -536,9 +534,8 @@ table_list:
         prop_type: bool
         prop_comment: 能删除
         column_name: z4
-        json_name: '-'
+        json_name: "-"
         default: default(1)
-
 
   - po_name: JtblHTReports
     table_name: ah
@@ -548,77 +545,77 @@ table_list:
     # 范围Key的注释
     zone_key_comment: 项目ID
     # 修改标记为不能删除的go语句
-    mark_cannot_del : 'MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId})'
+    mark_cannot_del: "MarkCannotDel(&CannotDelModel{JtblJobId: po.JobId})"
     search_sli:
       - HTReportNo
-      - TestCompanyCode 
-      - PreparedBy 
-      - SystemQualityPackNo 
-      - TestIDNo 
-      - SiteCode 
-      - Comment 
+      - TestCompanyCode
+      - PreparedBy
+      - SystemQualityPackNo
+      - TestIDNo
+      - SiteCode
+      - Comment
     vo_multi_prop_sli:
-        # PO 名称
+      # PO 名称
       - target_po: JtblPressureGuage
         # po 的主键对应的名称
-        target_po_key: Id 
+        target_po_key: Id
         # 查 vo_show 的数据源时所依赖vo的属性名称
         ref_prop_in_vo: PressureGuageId1
-        multi_prop: 
-        # vo json 显示名称
-        - vo_show: PressureGuageSerNo1
-          # vo tag,为可选项，外侧是单引号，内部是左上角的撇符号
-          vo_show_tag: '`json:"PressureGuageSerNo1,omitempty"`'
-          # json 属性的类型
-          vo_show_type: string
-          # vo 属性的注释
-          vo_show_comment: 压力表序列号1
-          # vo_show 的数据来源,po 中对应 vo_show 数据的字段
-          the_po_prop: SerialNumber      
-        - vo_show: CalibrationCertNo1
-          # vo tag,为可选项，外侧是单引号，内部是左上角的撇符号
-          vo_show_tag: '`json:"CalibrationCertNo1,omitempty"`'
-          # json 属性的类型
-          vo_show_type: string
-          # vo 属性的注释
-          vo_show_comment: 校验证书号1
-          # vo_show 的数据来源,po 中对应 vo_show 数据的字段
-          the_po_prop: CalibrationCertNo      
+        multi_prop:
+          # vo json 显示名称
+          - vo_show: PressureGuageSerNo1
+            # vo tag,为可选项，外侧是单引号，内部是左上角的撇符号
+            vo_show_tag: '`json:"PressureGuageSerNo1,omitempty"`'
+            # json 属性的类型
+            vo_show_type: string
+            # vo 属性的注释
+            vo_show_comment: 压力表序列号1
+            # vo_show 的数据来源,po 中对应 vo_show 数据的字段
+            the_po_prop: SerialNumber
+          - vo_show: CalibrationCertNo1
+            # vo tag,为可选项，外侧是单引号，内部是左上角的撇符号
+            vo_show_tag: '`json:"CalibrationCertNo1,omitempty"`'
+            # json 属性的类型
+            vo_show_type: string
+            # vo 属性的注释
+            vo_show_comment: 校验证书号1
+            # vo_show 的数据来源,po 中对应 vo_show 数据的字段
+            the_po_prop: CalibrationCertNo
       - target_po: JtblPressureGuage
         # po 的主键对应的名称
-        target_po_key: Id 
+        target_po_key: Id
         # 查 vo_show 的数据源时所依赖vo的属性名称
         ref_prop_in_vo: PressureGuageId2
-        multi_prop: 
-        # vo json 显示名称
-        - vo_show: PressureGuageSerNo2
-          # vo tag,为可选项，外侧是单引号，内部是左上角的撇符号
-          vo_show_tag: '`json:"PressureGuageSerNo2,omitempty"`'
-          # json 属性的类型
-          vo_show_type: string
-          # vo 属性的注释
-          vo_show_comment: 压力表序列号2
-          # vo_show 的数据来源,po 中对应 vo_show 数据的字段
-          the_po_prop: SerialNumber      
-        - vo_show: CalibrationCertNo2
-          # vo tag,为可选项，外侧是单引号，内部是左上角的撇符号
-          vo_show_tag: '`json:"CalibrationCertNo2,omitempty"`'
-          # json 属性的类型
-          vo_show_type: string
-          # vo 属性的注释
-          vo_show_comment: 校验证书号2
-          # vo_show 的数据来源,po 中对应 vo_show 数据的字段
-          the_po_prop: CalibrationCertNo      
-     
-# 	nvarchar(50)	是	
-# PressureRange2	nvarchar(50)	是	压力范围2
-# PressureRange3	nvarchar(50)	是	压力范围3
-# CalibrationCertNo1	nvarchar(50)	是	校验证书号1
-# CalibrationCertNo2	nvarchar(50)	是	校验证书号2
-# CalibrationCertNo3	nvarchar(50)	是	校验证书号3
-# CalibrationExpiry1	datetime	是	校验到期1
-# CalibrationExpiry2	datetime	是	校验到期2
-# CalibrationExpiry3	datetime	是	校验到期3 
+        multi_prop:
+          # vo json 显示名称
+          - vo_show: PressureGuageSerNo2
+            # vo tag,为可选项，外侧是单引号，内部是左上角的撇符号
+            vo_show_tag: '`json:"PressureGuageSerNo2,omitempty"`'
+            # json 属性的类型
+            vo_show_type: string
+            # vo 属性的注释
+            vo_show_comment: 压力表序列号2
+            # vo_show 的数据来源,po 中对应 vo_show 数据的字段
+            the_po_prop: SerialNumber
+          - vo_show: CalibrationCertNo2
+            # vo tag,为可选项，外侧是单引号，内部是左上角的撇符号
+            vo_show_tag: '`json:"CalibrationCertNo2,omitempty"`'
+            # json 属性的类型
+            vo_show_type: string
+            # vo 属性的注释
+            vo_show_comment: 校验证书号2
+            # vo_show 的数据来源,po 中对应 vo_show 数据的字段
+            the_po_prop: CalibrationCertNo
+
+    # 	nvarchar(50)	是
+    # PressureRange2	nvarchar(50)	是	压力范围2
+    # PressureRange3	nvarchar(50)	是	压力范围3
+    # CalibrationCertNo1	nvarchar(50)	是	校验证书号1
+    # CalibrationCertNo2	nvarchar(50)	是	校验证书号2
+    # CalibrationCertNo3	nvarchar(50)	是	校验证书号3
+    # CalibrationExpiry1	datetime	是	校验到期1
+    # CalibrationExpiry2	datetime	是	校验到期2
+    # CalibrationExpiry3	datetime	是	校验到期3
     column_list:
       - prop_name: Id
         prop_type: int64
@@ -657,19 +654,19 @@ table_list:
       - prop_name: SpecificationNo
         prop_type: string
         prop_comment: 规范号
-        column_name: a6 
+        column_name: a6
       - prop_name: SystemQualityPackNo
         prop_type: string
         prop_comment: 系统质量包编号
-        column_name: a7 
+        column_name: a7
       - prop_name: Location
         prop_type: string
         prop_comment: 测试地点
-        column_name: a8 
+        column_name: a8
       - prop_name: TestIDNo
         prop_type: string
         prop_comment: 测试ID号码
-        column_name: a9  
+        column_name: a9
       - prop_name: TestDuration
         prop_type: ztype.Time
         prop_comment: 测试时间
@@ -677,36 +674,36 @@ table_list:
       - prop_name: PressureGuageId1
         prop_type: int64
         prop_comment: 压力表1的ID
-        column_name: b2 
+        column_name: b2
         # 是外键
         foreign_key: true
-        omitempty: omitempty      
+        omitempty: omitempty
       - prop_name: PressureGuageId2
         prop_type: int64
         prop_comment: 压力表2的ID
-        column_name: b3 
+        column_name: b3
         # 是外键
         foreign_key: true
-        omitempty: omitempty      
+        omitempty: omitempty
       - prop_name: PressureGuageId3
         prop_type: int64
         prop_comment: 压力表3的ID
-        column_name: b4 
+        column_name: b4
         # 是外键
         foreign_key: true
         omitempty: omitempty
       - prop_name: SiteCode
         prop_type: string
         prop_comment: 现场代码
-        column_name: b5 
+        column_name: b5
       - prop_name: DesignPressure
         prop_type: string
         prop_comment: 设计压力
-        column_name: b6 
+        column_name: b6
       - prop_name: TestPressure
         prop_type: string
         prop_comment: 测试压力
-        column_name: b7 
+        column_name: b7
       - prop_name: AmbientTemp
         prop_type: string
         prop_comment: 环境温度
@@ -714,7 +711,7 @@ table_list:
       - prop_name: TestMedium
         prop_type: string
         prop_comment: 测试介质
-        column_name: b9 
+        column_name: b9
       - prop_name: IsLeakTest
         prop_type: bool
         prop_comment: 是泄漏测试
@@ -724,7 +721,7 @@ table_list:
       - prop_name: Comment
         prop_type: string
         prop_comment: 备注
-        column_name: c1   
+        column_name: c1
         column_type: TEXT
       - prop_name: CreatedBy
         prop_type: string
@@ -748,6 +745,5 @@ table_list:
         prop_type: bool
         prop_comment: 能删除
         column_name: z4
-        json_name: '-'
+        json_name: "-"
         default: default(1)
-

@@ -199,7 +199,7 @@ func Get{{.PoName}}Page(c *gin.Context) {
 	}
 	{{- end }}
 	poSli := make([]model.{{.PoName}}, 0)
-	session := db.Engine({{$.Engine_name}}).NewSession()
+	session := db.Session({{$.Engine_name}})
 	if req.Search != "" {
 		{{- range .SearchSli}}
 		session.Or(model.{{$table.PoName}}_{{.}}_DB + " like ?","%"+req.Search+"%" )

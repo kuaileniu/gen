@@ -6,6 +6,7 @@ import (
 )
 
 var language string
+
 // 回头参考下 https://github.com/gohade/hade/blob/main/app/console/kernel.go
 var rootCmd = &cobra.Command{
 	Use:   "gen",

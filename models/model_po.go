@@ -88,7 +88,11 @@ func (info *ModelInfo) InferenceColumnType() {
 			}
 			if strings.EqualFold("string", col.PropType) && col.ColumnType == "" {
 				col.ColumnType = "varchar"
+			} else if strings.EqualFold("*string", col.PropType) && col.ColumnType == "" {
+				col.ColumnType = "varchar"
 			} else if strings.EqualFold("int64", col.PropType) {
+				col.ColumnType = "bigint"
+			} else if strings.EqualFold("*int64", col.PropType) {
 				col.ColumnType = "bigint"
 			} else if strings.EqualFold("int32", col.PropType) {
 				col.ColumnType = "int"
@@ -103,7 +107,9 @@ func (info *ModelInfo) InferenceColumnType() {
 			} else if strings.EqualFold("ztype.Date", col.PropType) {
 				col.ColumnType = "timestamp"
 			} else if strings.EqualFold("bool", col.PropType) {
+			} else if strings.EqualFold("*bool", col.PropType) {
 			} else if strings.EqualFold("float64", col.PropType) {
+			} else if strings.EqualFold("*float64", col.PropType) {
 			} else if strings.EqualFold("zconst.KeYongStatus", col.PropType) {
 				col.ColumnType = "varchar"
 			} else if strings.EqualFold("zconst.TaskLockId", col.PropType) {
