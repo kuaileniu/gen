@@ -304,8 +304,8 @@ func (info *ModelInfo) CollectControllerImport() {
 	// sliceutil.AddNoRepeatStr(&info.ControllerImportList, "strings")
 }
 
-//字符串首字母转化为大写
-//AbC -> abC
+// 字符串首字母转化为大写
+// AbC -> abC
 func StringFirstToUpper(str string) string {
 	rstr := []rune(str)
 	first := rstr[0]
@@ -313,8 +313,8 @@ func StringFirstToUpper(str string) string {
 	return firstUpper + string(rstr[1:])
 }
 
-//字符串首字母转化为小写
-//abC -> AbC
+// 字符串首字母转化为小写
+// abC -> AbC
 func StringFirstToLower(str string) string {
 	rstr := []rune(str)
 	first := rstr[0]
