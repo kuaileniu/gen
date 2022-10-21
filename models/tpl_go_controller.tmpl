@@ -151,7 +151,7 @@ func Edit{{.PoName}}(c *gin.Context) {
 		{{ if  $table.ZoneKey -}}
 		exist, e := db.Engine({{$.Engine_name}}).In(model.{{$table.PoName}}_{{$table.ZoneKey}}_DB, req.JobId).NotIn(model.{{$table.PoName}}_Id_DB,req.Id).Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
 		{{ else }}
-		exist, e := db.Engine({{$.Engine_name}}).Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
+		exist, e := db.Engine({{$.Engine_name}}).NotIn(model.{{$table.PoName}}_Id_DB,req.Id).Exist(&model.{{$table.PoName}}{ {{.PropName}}: req.{{.PropName}} })
 		{{ end -}}
 		if e != nil {
 			zap.L().Error("根据 {{.PropName}} 查询 {{$table.PoName}} 时异常", zap.Error(e))
