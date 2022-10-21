@@ -120,7 +120,7 @@ func Edit{{.PoName}}(c *gin.Context) {
 	}
 
 	po := model.{{.PoName}}{Id: req.Id}
-	session := db.Engine({{$.Engine_name}}).NewSession()
+	session := db.Session({{$.Engine_name}})
 
 	{{- range .ColumnList -}}{{/* 判断前端是否传值过来*/}}
 	{{- if or .IsKey (eq .PropName "CreatedBy") (eq .PropName "ModifiedBy") (eq .PropName "CreateTime") (eq .PropName  "ModifyTime") (eq .PropName "CanDel") }}
