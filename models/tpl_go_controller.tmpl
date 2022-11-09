@@ -128,6 +128,8 @@ func Edit{{.PoName}}(c *gin.Context) {
 	{{- end -}}
 	{{- if and .ForeignKey  (eq .PropType "int64") }}
 	if strings.Contains(body, strings.ToUpper(model.{{$table.PoName}}_{{.PropName}}_GO)) && req.{{.PropName}} > 0 {
+	{{- else if or  (eq .PropType "ztype.Int8") (eq .PropType "ztype.Int16") (eq .PropType "ztype.Int32") (eq .PropType "ztype.Int64") (eq .PropType "ztype.Float32") (eq .PropType "ztype.Float64") }}
+	if req.{{.PropName}} != nil {
 	{{- else }}
 	if strings.Contains(body, strings.ToUpper(model.{{$table.PoName}}_{{.PropName}}_GO)) {
 	{{- end }}
