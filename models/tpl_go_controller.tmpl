@@ -112,7 +112,7 @@ func Edit{{.PoName}}(c *gin.Context) {
 	req := struct {
 		model.{{.PoName}}
 	}{}
-	body := GetBody(c, &req)
+	c.ShouldBindJSON(&req)
 
 	if req.Id < 1 {
 		c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "Id不可为空", EnglishMsg: "Id can't be empty"})
@@ -127,7 +127,7 @@ func Edit{{.PoName}}(c *gin.Context) {
 		{{- continue -}}
 	{{- end -}}
 	{{- if and .ForeignKey  (eq .PropType "int64") }}
-	if strings.Contains(body, strings.ToUpper(model.{{$table.PoName}}_{{.PropName}}_GO)) && req.{{.PropName}} >0 {
+	if strings.Contains(body, strings.ToUpper(model.{{$table.PoName}}_{{.PropName}}_GO)) && req.{{.PropName}} > 0 {
 	{{- else }}
 	if strings.Contains(body, strings.ToUpper(model.{{$table.PoName}}_{{.PropName}}_GO)) {
 	{{- end }}
