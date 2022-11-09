@@ -3,7 +3,6 @@ package models
 import (
 	"bytes"
 	_ "embed"
-	"log"
 	"strings"
 	"text/template"
 
@@ -88,16 +87,22 @@ func (info *ModelInfo) InferenceColumnType() {
 			}
 			if strings.EqualFold("string", col.PropType) && col.ColumnType == "" {
 				col.ColumnType = "varchar"
-			} else if strings.EqualFold("*string", col.PropType) && col.ColumnType == "" {
+			} else if strings.EqualFold("ztype.String", col.PropType) && col.ColumnType == "" {
 				col.ColumnType = "varchar"
 			} else if strings.EqualFold("int64", col.PropType) {
 				col.ColumnType = "bigint"
-			} else if strings.EqualFold("*int64", col.PropType) {
+			} else if strings.EqualFold("ztype.Int64", col.PropType) {
 				col.ColumnType = "bigint"
+			} else if strings.EqualFold("ztype.Int32", col.PropType) {
+				col.ColumnType = "int"
 			} else if strings.EqualFold("int32", col.PropType) {
 				col.ColumnType = "int"
+			} else if strings.EqualFold("ztype.Int16", col.PropType) {
+				col.ColumnType = "smallint"
 			} else if strings.EqualFold("int16", col.PropType) {
 				col.ColumnType = "smallint"
+			} else if strings.EqualFold("ztype.Int8", col.PropType) {
+				col.ColumnType = "tinyint"
 			} else if strings.EqualFold("int8", col.PropType) {
 				col.ColumnType = "tinyint"
 			} else if strings.HasPrefix("ztype.Money", col.PropType) {
@@ -106,10 +111,10 @@ func (info *ModelInfo) InferenceColumnType() {
 				col.ColumnType = "timestamp"
 			} else if strings.EqualFold("ztype.Date", col.PropType) {
 				col.ColumnType = "timestamp"
+			} else if strings.EqualFold("ztpe.Bool", col.PropType) {
 			} else if strings.EqualFold("bool", col.PropType) {
-			} else if strings.EqualFold("*bool", col.PropType) {
+			} else if strings.EqualFold("ztype.Float64", col.PropType) {
 			} else if strings.EqualFold("float64", col.PropType) {
-			} else if strings.EqualFold("*float64", col.PropType) {
 			} else if strings.EqualFold("zconst.KeYongStatus", col.PropType) {
 				col.ColumnType = "varchar"
 			} else if strings.EqualFold("zconst.TaskLockId", col.PropType) {
@@ -123,7 +128,8 @@ func (info *ModelInfo) InferenceColumnType() {
 			} else if strings.EqualFold("zconst.Lang", col.PropType) {
 				col.ColumnType = "varchar"
 			} else {
-				log.Printf("未将结构体属性类型[%v]映射到go数据库字段类型,%#v", col.PropType, col)
+				// log.Printf("未将结构体属性类型[%v]映射到go数据库字段类型,%#v", col.PropType, col)
+				zap.L().Error("未将结构体属性类型 映射到go数据库字段类型", zap.String("PropType", col.PropType), zap.Any("col", col))
 			}
 			table.ColumnList[col_index] = col
 		}

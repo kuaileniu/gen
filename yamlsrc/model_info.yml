@@ -5,6 +5,55 @@ engine_name: consts.ENGINE_SMCS_SERVER_DB
 # 模版中 import 引入 model 的路径
 model_path: github.com/kuaileniu/gen/target/model
 table_list:
+  - po_name: TestZtype
+    table_name: ab
+    po_comment: 测试Ztye
+    column_list:
+      - prop_name: Id
+        prop_type: int64
+        column_name: a0
+        is_key: true
+      - prop_name: JobName
+        prop_type: ztype.String
+        column_name: a1
+      - prop_name: PercentFloat64
+        prop_type: ztype.Float64
+        column_name: a2
+      - prop_name: PercentFloat32
+        prop_type: ztype.Float32
+        column_name: a3
+      - prop_name: JobTechRouteID
+        prop_type: ztype.Int64
+        column_name: a4
+      - prop_name: AgeInt32
+        prop_type: ztype.Int32
+        column_name: a5
+      - prop_name: AgeInt16
+        prop_type: ztype.Int16
+        column_name: a6
+      - prop_name: AgeInt8
+        prop_type: ztype.Int8
+        column_name: a7
+      - prop_name: Amt
+        column_name: a8
+        prop_type: ztype.Money
+        length: 10
+        precision: 2 
+      - prop_name: CompleteDate
+        prop_type: ztype.Date
+        column_name: a9
+      - prop_name: CreateTime
+        notnull: notnull
+        prop_type: ztype.Time
+        defalut_time: created
+        column_name: z2
+      - prop_name: ModifyTime
+        notnull: notnull
+        prop_type: ztype.Time
+        defalut_time: updated
+        column_name: z3
+
+
   - po_name: JtblLine
     table_name: ab
     po_comment: 管线
