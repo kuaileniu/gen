@@ -6,13 +6,16 @@ engine_name: consts.ENGINE_SMCS_SERVER_DB
 model_path: github.com/kuaileniu/gen/target/model
 table_list:
   - po_name: TestZtype
-    table_name: ab
+    table_name: TestZtype
     po_comment: 测试Ztye
     column_list:
       - prop_name: Id
         prop_type: int64
         column_name: a0
         is_key: true
+      - prop_name: Namestring
+        prop_type: string
+        column_name: a00
       - prop_name: JobName
         prop_type: ztype.String
         column_name: a1
