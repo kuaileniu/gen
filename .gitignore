@@ -67,7 +67,6 @@ sh.exe.stackdump
 *.out
 rice-box.go
 .DS_Store
-go.sum
 debug.test
 __MACOSX
 ~*.tmp
