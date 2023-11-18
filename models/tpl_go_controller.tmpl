@@ -10,6 +10,7 @@ import (
 	"go.zhsit.cn/db/v2"
 	"go.zhsit.cn/zweb/ctx"
 	"go.zhsit.cn/zweb/enum"
+	"github.com/kuaileniu/zstring"
 	"go.uber.org/zap"
 	"net/http"
 	"strings"
@@ -127,11 +128,11 @@ func Edit{{.PoName}}(c *gin.Context) {
 		{{- continue -}}
 	{{- end -}}
 	{{- if and .ForeignKey  (eq .PropType "int64") }}
-	if strings.Contains(body, strings.ToUpper(model.{{$table.PoName}}_{{.PropName}}_GO)) && req.{{.PropName}} > 0 {
+	if zstrings.FindKeyIgnoreCase(body, model.{{$table.PoName}}_{{.PropName}}_GO) && req.{{.PropName}} > 0 {
 	{{- else if or  (eq .PropType "ztype.Int8") (eq .PropType "ztype.Int16") (eq .PropType "ztype.Int32") (eq .PropType "ztype.Int64") (eq .PropType "ztype.Float32")  (eq .PropType "ztype.Float64") (eq .PropType "ztype.String") }}
 	if req.{{.PropName}} != nil {
 	{{- else }}
-	if strings.Contains(body, strings.ToUpper(model.{{$table.PoName}}_{{.PropName}}_GO)) {
+	if zstrings.FindKeyIgnoreCase(body, model.{{$table.PoName}}_{{.PropName}}_GO) {
 	{{- end }}
 		session.Cols(model.{{$table.PoName}}_{{.PropName}}_DB)
 		po.{{.PropName}} = req.{{.PropName}}

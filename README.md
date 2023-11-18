@@ -1,3 +1,7 @@
+# build
+python build.py -os=windows   
+python build.py -os=linux
+python build.py -os=linux
 # go1.18
 go build 和 go test 默认情况下不再修改 go.mod 和 go.sum。可通过 go mod tidy ，go get 或者手动完成；
 
