@@ -34,6 +34,7 @@ func main() {}
 go run gen.go -l go model -t target/models/po_model.go -s testdata/model_info.json -n true -o xorm
 
 go run gen.go -l go model -t target/models/po_model.go -s testdata/model_info.yml -n true -o xorm -c lower
+ 
 
 
 //gen -l go model -t target/models/po_model.go -s model_info.yml -n true -o xorm
@@ -41,6 +42,8 @@ go run gen.go -l go model -t target/models/po_model.go -s testdata/model_info.ym
 
 go run gen.go -l go model -t target/model/po_model.go -s testdata/model_info.json -o xorm
 go run gen.go --lang go model --po-target target/model/po_model.go --po-source testdata/model_info.json --orm xorm --controller-target target/controllers/controller_model.go
+
+go run gen.go --lang go model --po-target target/model/po_model.go --po-source yamlsrc/model_info.yml --orm xorm --controller-target target/controllers/controller_model.go
  
 
 
