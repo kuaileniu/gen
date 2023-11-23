@@ -128,11 +128,11 @@ func Edit{{.PoName}}(c *gin.Context) {
 		{{- continue -}}
 	{{- end -}}
 	{{- if and .ForeignKey  (eq .PropType "int64") }}
-	if zstring.FindKeyIgnoreCase(body, model.{{$table.PoName}}_{{.PropName}}_GO) && req.{{.PropName}} > 0 {
+	if zstring.FindKeyIgnoreCase(model.{{$table.PoName}}_{{.PropName}}_GO, body) && req.{{.PropName}} > 0 {
 	{{- else if or  (eq .PropType "ztype.Int8") (eq .PropType "ztype.Int16") (eq .PropType "ztype.Int32") (eq .PropType "ztype.Int64") (eq .PropType "ztype.Float32")  (eq .PropType "ztype.Float64") (eq .PropType "ztype.String") }}
 	if req.{{.PropName}} != nil {
 	{{- else }}
-	if zstring.FindKeyIgnoreCase(body, model.{{$table.PoName}}_{{.PropName}}_GO) {
+	if zstring.FindKeyIgnoreCase(model.{{$table.PoName}}_{{.PropName}}_GO, body) {
 	{{- end }}
 		session.Cols(model.{{$table.PoName}}_{{.PropName}}_DB)
 		po.{{.PropName}} = req.{{.PropName}}
