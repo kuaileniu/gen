@@ -248,11 +248,11 @@ func Get{{.PoName}}Page(c *gin.Context) {
 			{{- end}}
 		{{- end}}
 	}
-	voSli := make([]VO, len(poSli))
+	voPtrSli := make([]*VO, len(poSli))
 	for i := 0; i < len(poSli); i++ {
 		vo := VO{}
-		copier.Copy(&vo, &(poSli[i]))
-		voSli[i] = vo
+		copier.Copy(&vo, &(voPtrSli[i]))
+		voPtrSli[i] = &vo
 		{{- range .VoPropSli}}
 		sliceutil.AddNoRepeatInt64(&{{.VoDependent}}Sli, vo.{{.VoDependent}})
 		{{- end }}
@@ -278,8 +278,8 @@ func Get{{.PoName}}Page(c *gin.Context) {
 				c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "查询数据发生异常请稍后重试", EnglishMsg: "Error occurs when finding data"})
 				return
 			}
-			for i := 0; i < len(voSli); i++ {
-				voPtr := &voSli[i]
+			for i := 0; i < len(voPtrSli); i++ {
+				voPtr := &voPtrSli[i]
 				id := voPtr.{{.VoDependent}}
 				if id > 0 {
 					POPtr := poMap[id]
@@ -322,7 +322,7 @@ func Get{{.PoName}}Page(c *gin.Context) {
 			return
 		}
 	{{- end }}
-	c.JSON(http.StatusOK, (&ctx.PageResp{Total: total}).SetData(voSli)) //分页结果
+	c.JSON(http.StatusOK, (&ctx.PageResp{Total: total}).SetData(voPtrSli)) //分页结果
 }
 {{- end}}
 
