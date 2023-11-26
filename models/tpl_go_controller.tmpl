@@ -251,7 +251,8 @@ func Get{{.PoName}}Page(c *gin.Context) {
 	voPtrSli := make([]*VO, len(poSli))
 	for i := 0; i < len(poSli); i++ {
 		vo := VO{}
-		copier.Copy(&vo, &(voPtrSli[i]))
+		po:=poSli[i]
+		copier.Copy(&vo, &po)
 		voPtrSli[i] = &vo
 		{{- range .VoPropSli}}
 		sliceutil.AddNoRepeatInt64(&{{.VoDependent}}Sli, vo.{{.VoDependent}})
