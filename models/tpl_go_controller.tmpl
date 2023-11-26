@@ -300,8 +300,8 @@ func Get{{.PoName}}Page(c *gin.Context) {
 				c.JSON(http.StatusOK, ctx.Resp{Status: enum.StatusErrorTip, Msg: "查询数据发生异常请稍后重试", EnglishMsg: "Error occurs when finding data"})
 				return
 			}
-			for i := 0; i < len(voSli); i++ {
-				voPtr := &voSli[i]
+			for i := 0; i < len(voPtrSli); i++ {
+				voPtr := voPtrSli[i]
 				id := voPtr.{{.RefPropInVo}}
 				if id > 0 {
 					POPtr := poMap[id]
